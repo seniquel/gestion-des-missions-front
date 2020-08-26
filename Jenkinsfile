@@ -17,7 +17,7 @@ pipeline {
         }
         stage('deploy') {
           steps {
-            sh 'ng deploy --base-href=https://seniquel.github.io/gestion-des-missions-front/'
+            sh 'npm run deploy --base-href=https://seniquel.github.io/gestion-des-missions-front/'
           }
         }
     }
