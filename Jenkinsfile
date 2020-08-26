@@ -22,7 +22,7 @@ pipeline {
         }
         stage('deploy') {
           steps {
-            sh 'ng deploy --base-href=/gestion-des-missions-front/'
+            sh 'npm run ng deploy --base-href=/gestion-des-missions-front/'
           }
         }
     }
