@@ -1,6 +1,14 @@
 pipeline {
     agent any
+    tools {
+      nodejs "node12.18.3"
+    }
     stages {
+		}
+    	stage('verify') {
+        steps{
+          sh 'node -v'
+        }
 		}
         stage('checkout') {
             steps{
