@@ -9,11 +9,6 @@ pipeline {
           sh 'node -v'
         }
 		  }
-        stage('checkout') {
-            steps{
-                git 'https://github.com/seniquel/gestion-des-missions-front.git'
-            }
-        }
         stage('build') {
             steps {
                 sh 'npm install'
