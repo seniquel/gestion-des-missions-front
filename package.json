@@ -7,8 +7,7 @@
     "build": "cross-var ng build --prod --base-href https://$GH_ORG.github.io/$APP_REPO/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "deploy": "ng deploy"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
