@@ -42,7 +42,7 @@ pipeline {
         failure {
             discordSend description: "Failure ${currentBuild.displayName} ${env.BUILD_URL}",
                 footer: 'Léo a lamentablement échoué', image: '', link: '', result: 'FAILURE', thumbnail: '',
-               title: ' ${env.JOB_NAME}',
+               title: "${env.JOB_NAME}",
                  webhookURL: 'https://discordapp.com/api/webhooks/747819422705778738/dHWPHidlNLpiiKftWU84__Ss2LAkws77Swfdk5OWs22qla3hlI1B4zywW8ROg4nAwjRM'
              slackSend channel: 'jenkins-training', color: 'danger',
                  message: "Failure ${env.JOB_NAME} ${currentBuild.displayName} ${env.BUILD_URL} (Léo)",
