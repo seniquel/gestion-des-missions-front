@@ -17,7 +17,7 @@ pipeline {
 		    branch 'master'
 		 }*/
      steps {
-        sh "ng deploy --base-href=https://2020-d05-java-devops.github.io/gestion-des-absences-front/"
+        sh "npm run deploy"
       }
     }
   }
