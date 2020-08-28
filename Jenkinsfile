@@ -17,7 +17,7 @@ pipeline {
 		    branch 'master'
 		 }*/
      steps {
-        sh "ng deploy --no-silent --name="AntoineLabeeuw" --email=antoine.labeeuw@gmail.com --base-href=https://2020-d05-java-devops.github.io/gestion-des-missions-front/"
+        sh "ng deploy --no-silent --base-href=https://2020-d05-java-devops.github.io/gestion-des-missions-front/"
       }
     }
   }
