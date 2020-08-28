@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  missions_bdd:
+    image: seniquel/missions_bdd
+    container_name: missions_bdd
+    networks:
+    - missions-network
+    volumes:
+    - missions-bdd-data:/var/lib/postgresql
+
+  missions-back:
+    image:  seniquel/missions-back
+    container_name: missions-back
+    depends_on:
+        - missions-bdd
+    ports:
+        - "8080:8080"
+    networks:
+        - missions-network
+
+   missions-front:
+    image: seniquel/missions-front
+    container_name: missions-front
+    depends_on:
+        - missions-back
+    ports:
+        - "80:80"
+    networks:
+        - missions-network
+
+    adminer:
+        image: adminer
+        ports:
+            - "8181:8080"
+        depends_on:
+            -missions-bdd
+
+networks:
+  missions-network:
+
+volumes:
+  missions-bdd-data:
