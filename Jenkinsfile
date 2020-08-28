@@ -13,9 +13,9 @@ pipeline {
       }
     }
     stage('deploy-master') {
-      /*when {
+      when {
 		    branch 'master'
-		 }*/
+		 }
      steps {
         sh "ng deploy --no-silent --base-href=https://2020-d05-java-devops.github.io/gestion-des-missions-front/"
       }
