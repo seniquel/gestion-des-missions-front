@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "cross-var ng build --prod --base-href https://2020-d05-java-devops.github.io/gestion-des-absences-front/",
+    "build": "cross-var ng build --prod --base-href https://2020-d05-java-devops.github.io/gestion-des-missions-front/",
     "test": "ng test",
     "lint": "ng lint",
-    "deploy": "ng deploy --base-href=https://2020-d05-java-devops.github.io/gestion-des-absences-front/",
+    "deploy": "ng build --prod --output-path docs --base-href /gestion-des-missions-front/",
     "e2e": "ng e2e"
   },
   "private": true,
