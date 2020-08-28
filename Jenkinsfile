@@ -17,7 +17,7 @@ pipeline {
 		    branch 'master'
 		 }*/
      steps {
-        sh "npm run deploy"
+        sh "ng deploy --base-href=https://2020-d05-java-devops.github.io/gestion-des-missions-front/"
       }
     }
   }
