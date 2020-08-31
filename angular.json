@@ -129,8 +129,5 @@
       }
     }
   },
-  "defaultProject": "front",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "front"
 }
