@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "cross-var ng build --prod --base-href https://$GH_ORG.github.io/$APP_REPO/",
+    "build": "cross-var ng build --prod --base-href https://2020-d05-java-devops.github.io/gestion-des-missions-front",
+    "buildlocal": "cross-var ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -42,8 +43,8 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
-    "protractor": "~5.4.3",
-    "replace": "^0.3.0",
+    "protractor": "^7.0.0",
+    "replace": "^1.2.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
