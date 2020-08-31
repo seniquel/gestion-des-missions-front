@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "cross-var ng build --prod --base-href https://$GH_ORG.github.io/$APP_REPO/",
+    "build": "cross-var ng build --prod --base-href https://2020-d05-java-devops.github.io/gestion-des-missions-front",
+    "buildlocal": "cross-var ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
