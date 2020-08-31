@@ -1,2 +1,2 @@
 FROM nginx
-COPY /dist/gestion-des-missions-front /usr/share/nginx/html
+COPY dist/front /usr/share/nginx/html

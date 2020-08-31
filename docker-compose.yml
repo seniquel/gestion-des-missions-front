@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   missions-db:
+    image: missions-db
     build: ./missions-db
     container_name: missions-db
     networks:
@@ -10,22 +11,25 @@ services:
       - missions-bdd-data:/var/lib/postgresq/data
 
   missions-back:
-    build: https://github.com/2020-d05-java-devops/gestion-des-missions-back.git
+    image: missions-back
+    build: ../gestion-des-missions-back/.
+    command: mvn clean package
     container_name: missions-back
     depends_on:
       - missions-db
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - missions-network
 
   missions-front:
+    image: missions-front
     build: .
     container_name: missions-front
     depends_on:
       - missions-back
     ports:
-      - "8081:8081"
+      - "8082:80"
     networks:
       - missions-network
 
