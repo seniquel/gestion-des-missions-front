@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
-import {AuthService} from './auth.service';
-import {map, tap} from 'rxjs/operators';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { map, tap } from 'rxjs/operators';
 
 /**
  * Service utilisé par le routeur pour savoir si l'utilisateur est connecté.
@@ -12,7 +12,7 @@ import {map, tap} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class StatutConnecteService implements CanActivate{
+export class StatutConnecteService implements CanActivate {
 
   constructor(private _authSrv: AuthService, private _router: Router) {
   }
