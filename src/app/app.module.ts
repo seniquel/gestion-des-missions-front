@@ -12,6 +12,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AccueilComponent } from './accueil/accueil.component';
 import { MenuComponent } from './menu/menu.component';
+import { GestionMissionsComponent } from './gestion-missions/gestion-missions.component';
+import { PlanningMissionsComponent } from './planning-missions/planning-missions.component';
+import { PrimesComponent } from './primes/primes.component';
+import { NoteDeFraisComponent } from './note-de-frais/note-de-frais.component';
+import { ValidationMissionsComponent } from './validation-missions/validation-missions.component';
+import { NatureMissionsComponent } from './nature-missions/nature-missions.component';
 import { MissionsComponent } from './missions/missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
@@ -23,6 +29,12 @@ import { MissionModifComponent } from './missions/mission-modif/mission-modif.co
     TechComponent,
     AccueilComponent,
     MenuComponent,
+    GestionMissionsComponent,
+    PlanningMissionsComponent,
+    PrimesComponent,
+    NoteDeFraisComponent,
+    ValidationMissionsComponent,
+    NatureMissionsComponent,
     MissionsComponent,
     MissionDemandeComponent,
     MissionModifComponent,
