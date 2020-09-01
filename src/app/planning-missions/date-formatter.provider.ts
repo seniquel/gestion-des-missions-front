@@ -24,6 +24,4 @@ export class DateFormatter extends CalendarDateFormatter {
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return new DatePipe(locale).transform(date, 'EEE', locale);
   }
-
-  // Jours de la semaine
 }
