@@ -27,7 +27,7 @@ const routes: Routes = [
   // /nature-missions accessible si admin
   { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
-  { path: 'mission-midification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
+  { path: 'mission-modification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 
