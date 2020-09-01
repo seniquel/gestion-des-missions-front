@@ -11,8 +11,11 @@ import { AuthService } from '../auth/auth.service';
 export class MissionsComponent implements OnInit {
 
   collegueConnecte: Observable<Collegue>;
+  miss: string;
 
-  constructor(private authSrv: AuthService) { }
+  constructor(private authSrv: AuthService) {
+    this.miss = 'cong';
+  }
 
   /**
    * A l'initialisation, le composant s'abonne au flux du collègue courant connecté.
