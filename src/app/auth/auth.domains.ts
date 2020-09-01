@@ -1,3 +1,4 @@
+import { Mission } from './../missions/miss.domains';
 /**
  * Collègue utilisateur de l'application.
  */
@@ -6,6 +7,7 @@ export class Collegue {
   prenom: string;
   email: string;
   motDePasse: string;
+  missions: Mission[];
   role: string;
 
   constructor(params: any) {
