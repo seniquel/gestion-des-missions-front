@@ -20,6 +20,12 @@ import { NatureMissionsComponent } from './nature-missions/nature-missions.compo
 import { MissionsComponent } from './missions/missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -35,13 +41,14 @@ import { MissionModifComponent } from './missions/mission-modif/mission-modif.co
     NatureMissionsComponent,
     MissionsComponent,
     MissionDemandeComponent,
-    MissionModifComponent,
+    MissionModifComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
