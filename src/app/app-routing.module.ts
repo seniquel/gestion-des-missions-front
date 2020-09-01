@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'planning-missions', component: PlanningMissionsComponent },
   { path: 'primes', component: PrimesComponent },
   { path: 'note-de-frais', component: NoteDeFraisComponent },
-  { path: 'validation-missions', component: ValidationMissionsComponent },
-  { path: 'nature-missions', component: NatureMissionsComponent },
+  { path: 'validation-missions', component: ValidationMissionsComponent }, // /validation-mission accessible si manager
+  { path: 'nature-missions', component: NatureMissionsComponent }, // /nature-missions accessible si admin
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 
