@@ -12,7 +12,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AccueilComponent } from './accueil/accueil.component';
 import { MenuComponent } from './menu/menu.component';
-import { GestionMissionsComponent } from './gestion-missions/gestion-missions.component';
 import { PlanningMissionsComponent } from './planning-missions/planning-missions.component';
 import { PrimesComponent } from './primes/primes.component';
 import { NoteDeFraisComponent } from './note-de-frais/note-de-frais.component';
@@ -29,7 +28,6 @@ import { MissionModifComponent } from './missions/mission-modif/mission-modif.co
     TechComponent,
     AccueilComponent,
     MenuComponent,
-    GestionMissionsComponent,
     PlanningMissionsComponent,
     PrimesComponent,
     NoteDeFraisComponent,

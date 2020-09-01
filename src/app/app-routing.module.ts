@@ -1,6 +1,5 @@
 import { NatureMissionsComponent } from './nature-missions/nature-missions.component';
 import { ValidationMissionsComponent } from './validation-missions/validation-missions.component';
-import { GestionMissionsComponent } from './gestion-missions/gestion-missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionsComponent } from './missions/missions.component';
 import { NgModule } from '@angular/core';
@@ -18,14 +17,15 @@ const routes: Routes = [
   { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
   { path: 'connexion', component: AuthComponent },
   { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
-  { path: 'gestion-missions', component: GestionMissionsComponent },
-  { path: 'planning-missions', component: PlanningMissionsComponent },
-  { path: 'primes', component: PrimesComponent },
-  { path: 'note-de-frais', component: NoteDeFraisComponent },
-  { path: 'validation-missions', component: ValidationMissionsComponent }, // /validation-mission accessible si manager
-  { path: 'nature-missions', component: NatureMissionsComponent }, // /nature-missions accessible si admin
-  { path: 'missions', component: MissionsComponent },
-  { path: 'mission-demande', component: MissionDemandeComponent },
+  { path: 'planning-missions', component: PlanningMissionsComponent, canActivate: [StatutConnecteService] },
+  { path: 'primes', component: PrimesComponent, canActivate: [StatutConnecteService] },
+  { path: 'note-de-frais', component: NoteDeFraisComponent, canActivate: [StatutConnecteService] },
+  { path: 'validation-missions', component: ValidationMissionsComponent, canActivate: [StatutConnecteService] },
+  // /validation-mission accessible si manager
+  { path: 'nature-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] },
+  // /nature-missions accessible si admin
+  { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
+  { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 
