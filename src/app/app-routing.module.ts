@@ -1,6 +1,8 @@
 import { NatureMissionsComponent } from './nature-missions/nature-missions.component';
 import { ValidationMissionsComponent } from './validation-missions/validation-missions.component';
 import { GestionMissionsComponent } from './gestion-missions/gestion-missions.component';
+import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
+import { MissionsComponent } from './missions/missions.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TechComponent } from './tech/tech.component';
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'note-de-frais', component: NoteDeFraisComponent },
   { path: 'validation-missions', component: ValidationMissionsComponent }, // /validation-mission accessible si manager
   { path: 'nature-missions', component: NatureMissionsComponent }, // /nature-missions accessible si admin
+  { path: 'missions', component: MissionsComponent },
+  { path: 'mission-demande', component: MissionDemandeComponent },
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 
