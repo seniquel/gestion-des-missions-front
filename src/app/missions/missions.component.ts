@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Collegue } from '../auth/auth.domains';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-missions',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MissionsComponent implements OnInit {
 
-  constructor() { }
+  collegueConnecte: Observable<Collegue>;
 
+  constructor(private authSrv: AuthService) { }
+
+  /**
+   * A l'initialisation, le composant s'abonne au flux du collègue courant connecté.
+   *
+   * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
+   */
   ngOnInit(): void {
+    this.collegueConnecte = this.authSrv.collegueConnecteObs;
   }
 
 }

@@ -9,5 +9,7 @@ export class Mission {
   villeArrivee: string;
   prime: number;
   nature: string;
+  trasport: string;
+  statut: string;
   collegue: Collegue;
 }
