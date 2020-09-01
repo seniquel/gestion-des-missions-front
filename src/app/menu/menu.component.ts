@@ -1,4 +1,7 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { Collegue } from '../auth/auth.domains';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  roleCollegue: Observable<Collegue>;
+
+  constructor(private authSrv: AuthService) { }
 
   ngOnInit(): void {
+    this.roleCollegue = this.authSrv.collegueConnecteObs;
   }
-
 }
