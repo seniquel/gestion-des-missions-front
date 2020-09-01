@@ -32,7 +32,6 @@ export class AppComponent {
    * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
    */
   ngOnInit(): void {
-
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
   }
 }
