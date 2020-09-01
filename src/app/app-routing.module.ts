@@ -1,3 +1,4 @@
+import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
 import { NatureMissionsComponent } from './nature-missions/nature-missions.component';
 import { ValidationMissionsComponent } from './validation-missions/validation-missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   // /nature-missions accessible si admin
   { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
+  { path: 'mission-midification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 
