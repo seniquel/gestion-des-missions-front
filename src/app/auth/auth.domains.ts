@@ -7,8 +7,8 @@ export class Collegue {
   prenom: string;
   email: string;
   motDePasse: string;
-  roles: string[];
   missions: Mission[];
+  role: string;
 
   constructor(params: any) {
     Object.assign(this, params);
