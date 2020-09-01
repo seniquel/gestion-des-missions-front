@@ -14,7 +14,7 @@ export class MissionsComponent implements OnInit {
   miss: string;
 
   constructor(private authSrv: AuthService) {
-    this.miss = 'cong';
+    this.miss = 'congé';
   }
 
   /**
