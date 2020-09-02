@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
 export class PrimesComponent implements OnInit {
 
   listeMissions: Mission[];
-  listeDate: Date[];
+  listeAnnee: number[];
   collegueConnecte: Observable<Collegue>;
 
   constructor(private authSrv: AuthService) {
@@ -22,15 +22,17 @@ export class PrimesComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
-    this.listeDate = this.recupererDate();
+    this.listeAnnee = this.recupererAnnee();
   }
 
-  recupererDate(): Date[] {
-    const datesFin: Date[] = [];
+  recupererAnnee(): number[] {
+    const annees: number[] = [];
     for (let i = 0; i < this.listeMissions.length; i++) {
-      datesFin.push(this.listeMissions[i].dateFin);
+      if (!annees.includes(this.listeMissions[i].dateFin.getFullYear(), 0)) {
+        annees.push(this.listeMissions[i].dateFin.getFullYear());
+      }
     }
-    return datesFin;
+    return annees;
   }
 
 }
