@@ -29,8 +29,7 @@ export class MissionsComponent implements OnInit {
       value => console.log(value)
     )
     this.collegueConnecte.subscribe(
-      value =>
-        this.listeMissions.concat(value.missions)
+      value => this.listeMissions = value.missions
     );
   }
 
