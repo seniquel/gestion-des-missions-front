@@ -15,6 +15,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   recupererMissions(uuid: string): Observable<Mission[]> {
-    return this.http.get<Mission[]>(`${this.URL_BACKEND}/{uuid}/missions`);
+    return this.http.get<Mission[]>(`${this.URL_BACKEND}collegue/${uuid}/missions`);
   }
 }

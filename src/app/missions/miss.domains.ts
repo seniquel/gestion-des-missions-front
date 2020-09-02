@@ -11,5 +11,4 @@ export class Mission {
   nature: string;
   trasport: string;
   statut: string;
-  collegue: Collegue;
 }

@@ -3,6 +3,7 @@ import { Mission } from './../missions/miss.domains';
  * Collègue utilisateur de l'application.
  */
 export class Collegue {
+  uuid: string;
   nom: string;
   prenom: string;
   email: string;
