@@ -20,6 +20,7 @@ import { NatureMissionsComponent } from './nature-missions/nature-missions.compo
 import { MissionsComponent } from './missions/missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MissionModifComponent } from './missions/mission-modif/mission-modif.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

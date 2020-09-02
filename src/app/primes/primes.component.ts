@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-primes',
@@ -12,14 +14,23 @@ import { AuthService } from '../auth/auth.service';
 })
 export class PrimesComponent implements OnInit {
 
-  listeMissions: Mission[];
-  listeAnnee: number[];
-  anneeSelect: number = null;
-  collegueConnecte: Observable<Collegue>;
-
   constructor(private authSrv: AuthService) {
     this.listeMissions = missionMock;
   }
+
+  listeMissions: Mission[];
+  listeAnnee: number[];
+  anneeSelect: number;
+  missionsSelect: Mission[];
+  collegueConnecte: Observable<Collegue>;
+
+  // diagramme
+  barChartOptions: ChartOptions;
+  barChartLabels: Label[] = ['janv', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
+  barChartType: ChartType = 'bar';
+  barChartLegend = false;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[];
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
@@ -36,23 +47,42 @@ export class PrimesComponent implements OnInit {
     return annees;
   }
 
-  selectionMissionParAnnee(): Mission[] {
-    const missions: Mission[] = [];
+  onChange(): void {
+    this.selectionMissionParAnnee();
+    this.changeOnDiagramme();
+  }
+
+  selectionMissionParAnnee(): void {
+    this.missionsSelect = []
     const currentTime: Date = new Date();
     for (let i = 0; i < this.listeMissions.length; i++) {
       if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect == currentTime.getFullYear()) {
         if (this.listeMissions[i].dateFin.getMonth() < currentTime.getMonth()) {
-          missions.push(this.listeMissions[i]);
+          this.missionsSelect.push(this.listeMissions[i]);
         }
         else if (this.listeMissions[i].dateFin.getMonth() == currentTime.getMonth() && this.listeMissions[i].dateFin.getDate() < currentTime.getDate()) {
-          missions.push(this.listeMissions[i]);
+          this.missionsSelect.push(this.listeMissions[i]);
         }
       }
       else if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect < currentTime.getFullYear()) {
-        missions.push(this.listeMissions[i]);
+        this.missionsSelect.push(this.listeMissions[i]);
       }
     }
-    return missions;
+  }
+
+  changeOnDiagramme(): void {
+    this.barChartOptions = {
+      title: {
+        display: true,
+        text: `Primes année ${this.anneeSelect}`,
+      },
+      responsive: true,
+      scales: { xAxes: [{}], yAxes: [{}] },
+    };
+
+    this.barChartData = [
+      { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    ]
   }
 
 }
