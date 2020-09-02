@@ -14,6 +14,7 @@ export class PrimesComponent implements OnInit {
 
   listeMissions: Mission[];
   listeAnnee: number[];
+  anneeSelect: number = null;
   collegueConnecte: Observable<Collegue>;
 
   constructor(private authSrv: AuthService) {
@@ -33,6 +34,25 @@ export class PrimesComponent implements OnInit {
       }
     }
     return annees;
+  }
+
+  selectionMissionParAnnee(): Mission[] {
+    const missions: Mission[] = [];
+    const currentTime: Date = new Date();
+    for (let i = 0; i < this.listeMissions.length; i++) {
+      if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect == currentTime.getFullYear()) {
+        if (this.listeMissions[i].dateFin.getMonth() < currentTime.getMonth()) {
+          missions.push(this.listeMissions[i]);
+        }
+        else if (this.listeMissions[i].dateFin.getMonth() == currentTime.getMonth() && this.listeMissions[i].dateFin.getDate() < currentTime.getDate()) {
+          missions.push(this.listeMissions[i]);
+        }
+      }
+      else if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect < currentTime.getFullYear()) {
+        missions.push(this.listeMissions[i]);
+      }
+    }
+    return missions;
   }
 
 }
