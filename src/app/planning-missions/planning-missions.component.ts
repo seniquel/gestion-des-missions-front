@@ -30,6 +30,9 @@ export class PlanningMissionsComponent implements OnInit {
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   CalendarView = CalendarView;
 
+  // Listes des missions du collègue
+  collegueMission: Observable<Mission>;
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -37,6 +40,7 @@ export class PlanningMissionsComponent implements OnInit {
   constructor(private dataServ: DataService) { }
 
   ngOnInit(): void {
+    //this.collegueMission = this.dataServ.recupererMissions();
   }
 
 }
