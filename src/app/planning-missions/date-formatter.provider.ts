@@ -13,15 +13,8 @@ export class DateFormatter extends CalendarDateFormatter {
     return this.dayViewHour({ date, locale });
   }
 
-  public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    return new DatePipe(locale).transform(date, 'EEE', locale);
-  }
-
   public monthViewTitle({ date, locale }: DateFormatterParams): string {
-    return new DatePipe(locale).transform(date, 'MMM y', locale);
+    return new DatePipe(locale).transform(date, 'MMMM y', locale);
   }
 
-  public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    return new DatePipe(locale).transform(date, 'EEE', locale);
-  }
 }

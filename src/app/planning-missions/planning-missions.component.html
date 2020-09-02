@@ -1,30 +1,42 @@
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate">
-        Previous
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate">
-        Next
-      </div>
-    </div>
+<app-menu></app-menu>
+<br>
+<h1 class="text-center">Planning des Missions</h1>
+<br>
+<div class="row">
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarPreviousView
+    [view]="view"
+    [(viewDate)]="viewDateNextYear">
+    <i class="fa fa-angle-double-left"></i>
   </div>
-  <div class="col-md-4">
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarPreviousView
+    [view]="view"
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-left"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarNextView
+    [view]="view"
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarNextView
+    [view]="view"
+    [(viewDate)]="viewDateNextYear">
+    <i class="fa fa-angle-double-right"></i>
+  </div>
+  <div class="text-center">
     <h3>
       {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
     </h3>
   </div>
 </div>
-<br />
-
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"

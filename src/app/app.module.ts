@@ -24,7 +24,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// Calendar
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -41,13 +43,14 @@ registerLocaleData(localeFr);
     NatureMissionsComponent,
     MissionsComponent,
     MissionDemandeComponent,
-    MissionModifComponent
+    MissionModifComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [{
@@ -57,4 +60,5 @@ registerLocaleData(localeFr);
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
