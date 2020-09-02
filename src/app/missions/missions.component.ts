@@ -26,9 +26,6 @@ export class MissionsComponent implements OnInit {
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
     this.collegueConnecte.subscribe(
-      value => console.log(value)
-    )
-    this.collegueConnecte.subscribe(
       value => this.listeMissions = value.missions
     );
   }
