@@ -1,3 +1,4 @@
+import { NoteDeFrais } from './../note-de-frais/noteFrais.domain';
 import { Collegue } from './../auth/auth.domains';
 /**
  * Mission d'un utilisateur
@@ -9,7 +10,8 @@ export class Mission {
   villeArrivee: string;
   prime: number;
   nature: string;
-  trasport: string;
+  transport: string;
   statut: string;
   collegue: Collegue;
+  noteDeFrais: NoteDeFrais;
 }
