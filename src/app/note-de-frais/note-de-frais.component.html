@@ -1,1 +1,32 @@
-<p>note-de-frais works!</p>
+<app-menu></app-menu>
+
+<h1 class="text-center">Gestion des Missions</h1>
+
+<table class="table table-striped" *ngIf="collegueConnecte | async as col">
+  <thead>
+    <tr>
+      <th scope="col">Date de début</th>
+      <th scope="col">Date de fin</th>
+      <th scope="col">Nature</th>
+      <th scope="col">Départ</th>
+      <th scope="col">Arrivée</th>
+      <th scope="col">Transport</th>
+      <th scope="col">Frais</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mission of col.missions">
+      <td>{{mission.dateDebut}}</td>
+      <td>{{mission.dateFin}}</td>
+      <td>{{mission.nature}}</td>
+      <td>{{mission.villeDepart}}</td>
+      <th>{{mission.villeArrivee}}</th>
+      <td>{{mission.transport}}</td>
+      <td>{{mission.noteDeFrais}}</td>
+      <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px' class='fas'
+          routerLink='/mission-modification'>&#xf304;</i><i style='font-size:24px' class='fas'>&#xf2ed;</i>
+        <i *ngIf="mission.nature == 'Congés payés'" style='font-size:24px' class='fas'>&#xf06e;</i></td>
+    </tr>
+  </tbody>
+</table>
