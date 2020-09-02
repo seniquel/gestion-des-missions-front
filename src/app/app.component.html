@@ -9,5 +9,10 @@
   </ng-container>
 </div>
 <main class="container">
+  <ng-container *ngIf="collegueConnecte | async as col">
+    <div *ngIf="!col.estAnonyme()">
+      <app-menu></app-menu>
+    </div>
+  </ng-container>
   <router-outlet></router-outlet>
 </main>
