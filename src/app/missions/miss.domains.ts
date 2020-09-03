@@ -1,3 +1,4 @@
+import { Nature } from './../nature-missions/nature.domain';
 import { Collegue } from './../auth/auth.domains';
 /**
  * Mission d'un utilisateur
@@ -8,8 +9,7 @@ export class Mission {
   villeDepart: string;
   villeArrivee: string;
   prime: number;
-  nature: string;
-  trasport: string;
+  nature: Nature;
+  transport: string;
   statut: string;
-  collegue: Collegue;
 }

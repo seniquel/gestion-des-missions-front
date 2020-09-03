@@ -13,7 +13,6 @@ services:
   missions-back:
     image: missions-back
     build: ../gestion-des-missions-back/.
-    command: mvn clean package
     container_name: missions-back
     depends_on:
       - missions-db
@@ -29,7 +28,7 @@ services:
     depends_on:
       - missions-back
     ports:
-      - "8080:80"
+      - "9000:80"
     networks:
       - missions-network
 

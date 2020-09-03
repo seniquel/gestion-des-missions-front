@@ -21,6 +21,14 @@ import { MissionsComponent } from './missions/missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
 import { ChartsModule } from 'ng2-charts';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// Calendar
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -43,7 +51,9 @@ import { ChartsModule } from 'ng2-charts';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    NgbModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -52,4 +62,5 @@ import { ChartsModule } from 'ng2-charts';
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,1 +1,69 @@
-<p>planning-missions works!</p>
+<h1 class="text-center">Planning des Missions</h1>
+<br>
+<div class="row">
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarPreviousView
+    [view]="view"
+    [(viewDate)]="viewDateNextYear">
+    <i class="fa fa-angle-double-left"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarPreviousView
+    [view]="view"
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-left"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarNextView
+    [view]="view"
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarNextView
+    [view]="view"
+    [(viewDate)]="viewDateNextYear">
+    <i class="fa fa-angle-double-right"></i>
+  </div>
+  <div class="text-center">
+    <h3>
+      {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
+    </h3>
+  </div>
+</div>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [locale]="locale"
+    [weekStartsOn]="weekStartsOn"
+    [weekendDays]="weekendDays">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [locale]="locale"
+    [weekStartsOn]="weekStartsOn"
+    [weekendDays]="weekendDays">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [locale]="locale">
+  </mwl-calendar-day-view>
+</div>
+
+
+<div>
+  <ul *ngFor="let mission of listeMissions">
+    <li> Date de début : {{mission.dateDebut}}</li>
+    <li> Nature : {{mission.nature.libelle}}</li>
+  </ul>
+</div>

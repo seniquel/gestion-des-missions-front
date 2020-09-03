@@ -1,7 +1,9 @@
+import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
+import { Mission } from './miss.domains';
 
 @Component({
   selector: 'app-missions',
@@ -11,8 +13,9 @@ import { AuthService } from '../auth/auth.service';
 export class MissionsComponent implements OnInit {
 
   collegueConnecte: Observable<Collegue>;
+  listeMissions: Mission[];
 
-  constructor(private authSrv: AuthService) {
+  constructor(private authSrv: AuthService, private service: DataService) {
   }
 
   /**
@@ -22,6 +25,14 @@ export class MissionsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
+    this.service.recupererMissions().subscribe(
+      value => {
+        this.listeMissions = value;
+        console.log(this.listeMissions);
+      },
+      err => console.log(err),
+      () => { }
+    );
   }
 
 }
