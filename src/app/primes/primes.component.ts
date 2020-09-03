@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartOptions, ChartType, ChartDataSets, ChartColor, BorderWidth } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-primes',
@@ -26,11 +26,17 @@ export class PrimesComponent implements OnInit {
 
   // diagramme
   barChartOptions: ChartOptions;
-  barChartLabels: Label[] = ['janv', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = false;
   barChartPlugins = [];
   barChartData: ChartDataSets[];
+  barColors: Color[] = [
+    { // dark grey
+      backgroundColor: ['rgba(77,83,96,0.2)'],
+    },
+  ];
+  barChartWidth: BorderWidth = 2;
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
@@ -49,7 +55,9 @@ export class PrimesComponent implements OnInit {
 
   onChange(): void {
     this.selectionMissionParAnnee();
-    this.changeOnDiagramme();
+    this.changeTitre();
+    this.changeData();
+    this.changeLabel();
   }
 
   selectionMissionParAnnee(): void {
@@ -70,7 +78,7 @@ export class PrimesComponent implements OnInit {
     }
   }
 
-  changeOnDiagramme(): void {
+  changeTitre(): void {
     this.barChartOptions = {
       title: {
         display: true,
@@ -79,10 +87,31 @@ export class PrimesComponent implements OnInit {
       responsive: true,
       scales: { xAxes: [{}], yAxes: [{}] },
     };
+  }
 
+  changeData(): void {
+    const sommeList: number[] = [];
+    for (let i = 0; i < 12; i++) {
+      let somme = 0;
+      for (let j = 0; j < this.missionsSelect.length; j++) {
+        if (this.missionsSelect[j].dateFin.getMonth() == i) {
+          somme += this.missionsSelect[j].prime;
+        }
+      }
+      sommeList.push(somme);
+    }
     this.barChartData = [
-      { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-    ]
+      { data: sommeList },
+    ];
+  }
+
+  changeLabel() {
+    this.barChartLabels = [];
+    const mois: string[] = ['janv', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
+    for (let i = 0; i < 12; i++) {
+      const ajout: number = this.anneeSelect - 2000;
+      this.barChartLabels.push(mois[i].concat('-').concat(ajout.toString()));
+    }
   }
 
 }
