@@ -1,4 +1,4 @@
-<h1 class="text-center">Gestion des Missions</h1>
+<h1 class="text-center">Gestion des notes de frais</h1>
 
 <table class="table table-striped" *ngIf="collegueConnecte | async as col">
   <thead>
@@ -14,16 +14,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let mission of col.missions">
+    <tr *ngFor="let mission of listeMissions">
       <td>{{mission.dateDebut}}</td>
       <td>{{mission.dateFin}}</td>
       <td>{{mission.nature.libelle}}</td>
       <td>{{mission.villeDepart}}</td>
       <th>{{mission.villeArrivee}}</th>
       <td>{{mission.transport}}</td>
-      <td>{{mission.noteDeFrais}}</td>
-      <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px' class='fas'
-          routerLink='/mission-modification'>&#xf304;</i></td>
+      <td>{{mission.noteDeFrais.fraisTotal}}€</td>
+      <!-- TODO : trouver moyen de comparer sans le getDate() -->
+      <!-- de base, toutes les missions ont une note de frais.
+      On ne peut la modifier (ajouter des lignes) que si la date de fin de la mission < dateAujourd'hui-->
+      <td><i *ngIf="mission.noteDeFrais" style='font-size:24px' class='fas'
+        [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i></td>
     </tr>
   </tbody>
 </table>

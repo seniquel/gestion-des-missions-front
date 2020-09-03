@@ -1,3 +1,4 @@
+import { NoteModificationComponent } from './note-de-frais/note-modification/note-modification.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
 import { NatureMissionsComponent } from './nature-missions/nature-missions.component';
 import { ValidationMissionsComponent } from './validation-missions/validation-missions.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-modification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
+  { path: 'note-modification/:uuid', component: NoteModificationComponent, canActivate: [StatutConnecteService] },
   { path: '', redirectTo: '/tech', pathMatch: 'full' }
 ];
 

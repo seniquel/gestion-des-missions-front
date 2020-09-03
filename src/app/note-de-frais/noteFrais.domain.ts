@@ -1,6 +1,11 @@
+import { LigneDeFrais } from './ligneFrais.domain';
+
 /*
 * Note de frais d'une mission
 */
 export class NoteDeFrais {
-  DateDeSaisie: Date;
+  uuid: string;
+  dateDeSaisie: Date;
+  fraisTotal: number;
+  lignesDeFrais: LigneDeFrais[];
 }

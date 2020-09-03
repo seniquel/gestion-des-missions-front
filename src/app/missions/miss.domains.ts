@@ -5,6 +5,7 @@ import { Collegue } from './../auth/auth.domains';
  * Mission d'un utilisateur
  */
 export class Mission {
+  uuid: string;
   dateDebut: Date;
   dateFin: Date;
   villeDepart: string;

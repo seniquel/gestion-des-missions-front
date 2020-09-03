@@ -25,6 +25,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NoteModificationComponent } from './note-de-frais/note-modification/note-modification.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -44,6 +45,7 @@ registerLocaleData(localeFr);
     MissionsComponent,
     MissionDemandeComponent,
     MissionModifComponent,
+    NoteModificationComponent,
   ],
   imports: [
     BrowserModule,
