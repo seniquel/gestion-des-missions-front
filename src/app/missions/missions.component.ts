@@ -26,12 +26,11 @@ export class MissionsComponent implements OnInit {
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
     this.service.recupererMissions().subscribe(
-      value => {
-        this.listeMissions = value;
+      mission => {
+        this.listeMissions = mission;
         console.log(this.listeMissions);
       },
-      err => console.log(err),
-      () => { }
+      err => console.log(err)
     );
   }
 
