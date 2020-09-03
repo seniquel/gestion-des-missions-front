@@ -20,6 +20,7 @@ import { NatureMissionsComponent } from './nature-missions/nature-missions.compo
 import { MissionsComponent } from './missions/missions.component';
 import { MissionDemandeComponent } from './missions/mission-demande/mission-demande.component';
 import { MissionModifComponent } from './missions/mission-modif/mission-modif.component';
+import { ChartsModule } from 'ng2-charts';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
@@ -50,6 +51,7 @@ registerLocaleData(localeFr);
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ChartsModule,
     NgbModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
