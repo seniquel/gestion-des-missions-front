@@ -129,4 +129,9 @@ export class PrimesComponent implements OnInit {
     }
   }
 
+  // Fichier Excel
+  nouveauFichier() {
+    this.service.creerFichierExcel(this.anneeSelect);
+  }
+
 }

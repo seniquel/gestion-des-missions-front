@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Mission } from '../missions/miss.domains';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
@@ -16,5 +16,25 @@ export class DataService {
 
   recupererMissions(): Observable<Mission[]> {
     return this.http.get<Mission[]>(`${this.URL_BACKEND}collegues/me/missions`);
+  }
+
+  creerFichierExcel(annee: number): void {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    // envoie de la requête
+    this.http.post(`${this.URL_BACKEND}missions/missions-par-annee`,
+      JSON.stringify(annee),
+      httpOptions
+    ).subscribe((data: any) => {
+      console.log(data);
+    }, (error: HttpErrorResponse) => {
+      console.log('error', error);
+      alert('Le fichier n\'a pas pu être créé !');
+    });
+
   }
 }
