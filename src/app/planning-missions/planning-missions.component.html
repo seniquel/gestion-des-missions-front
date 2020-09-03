@@ -59,3 +59,11 @@
     [locale]="locale">
   </mwl-calendar-day-view>
 </div>
+
+
+<div>
+  <ul *ngFor="let mission of listeMissions">
+    <li> Date de début : {{mission.dateDebut}}</li>
+    <li> Nature : {{mission.nature.libelle}}</li>
+  </ul>
+</div>
