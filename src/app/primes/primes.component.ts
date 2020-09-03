@@ -1,4 +1,4 @@
-import { missionMock } from './mock.mission';
+import { async } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Mission } from '../missions/miss.domains';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Collegue } from '../auth/auth.domains';
 import { Label, Color } from 'ng2-charts';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-primes',
@@ -14,8 +15,7 @@ import { Label, Color } from 'ng2-charts';
 })
 export class PrimesComponent implements OnInit {
 
-  constructor(private authSrv: AuthService) {
-    this.listeMissions = missionMock;
+  constructor(private authSrv: AuthService, private service: DataService) {
   }
 
   listeMissions: Mission[];
@@ -39,14 +39,28 @@ export class PrimesComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
-    this.listeAnnee = this.recupererAnnee();
+    this.service.recupererMissions().subscribe(
+      value => {
+        this.listeMissions = value;
+      },
+      err => console.log(err),
+      () => { }
+    );
+
+    setTimeout(() => {
+      this.listeAnnee = this.recupererAnnee();
+    }, 2000);
+
+
   }
 
   recupererAnnee(): number[] {
     const annees: number[] = [];
+
     for (let i = 0; i < this.listeMissions.length; i++) {
-      if (!annees.includes(this.listeMissions[i].dateFin.getFullYear(), 0)) {
-        annees.push(this.listeMissions[i].dateFin.getFullYear());
+      const dateFin2: Date = new Date(this.listeMissions[i].dateFin);
+      if (!annees.includes(dateFin2.getFullYear(), 0)) {
+        annees.push(dateFin2.getFullYear());
       }
     }
     return annees;
@@ -60,18 +74,19 @@ export class PrimesComponent implements OnInit {
   }
 
   selectionMissionParAnnee(): void {
-    this.missionsSelect = []
+    this.missionsSelect = [];
     const currentTime: Date = new Date();
     for (let i = 0; i < this.listeMissions.length; i++) {
-      if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect == currentTime.getFullYear()) {
-        if (this.listeMissions[i].dateFin.getMonth() < currentTime.getMonth()) {
+      const dateFin2: Date = new Date(this.listeMissions[i].dateFin);
+      if (dateFin2.getFullYear() == this.anneeSelect && this.anneeSelect == currentTime.getFullYear()) {
+        if (dateFin2.getMonth() < currentTime.getMonth()) {
           this.missionsSelect.push(this.listeMissions[i]);
         }
-        else if (this.listeMissions[i].dateFin.getMonth() == currentTime.getMonth() && this.listeMissions[i].dateFin.getDate() < currentTime.getDate()) {
+        else if (dateFin2.getMonth() == currentTime.getMonth() && dateFin2.getDate() < currentTime.getDate()) {
           this.missionsSelect.push(this.listeMissions[i]);
         }
       }
-      else if (this.listeMissions[i].dateFin.getFullYear() == this.anneeSelect && this.anneeSelect < currentTime.getFullYear()) {
+      else if (dateFin2.getFullYear() == this.anneeSelect && this.anneeSelect < currentTime.getFullYear()) {
         this.missionsSelect.push(this.listeMissions[i]);
       }
     }
@@ -93,7 +108,8 @@ export class PrimesComponent implements OnInit {
     for (let i = 0; i < 12; i++) {
       let somme = 0;
       for (let j = 0; j < this.missionsSelect.length; j++) {
-        if (this.missionsSelect[j].dateFin.getMonth() == i) {
+        const dateFin2: Date = new Date(this.listeMissions[j].dateFin);
+        if (dateFin2.getMonth() == i) {
           somme += this.missionsSelect[j].prime;
         }
       }
