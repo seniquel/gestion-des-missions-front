@@ -5,8 +5,8 @@
     class="btn btn-default btn-lg"
     mwlCalendarPreviousView
     [view]="view"
-    [(viewDate)]="viewDateNextYear">
-    <i class="fa fa-angle-double-left"></i>
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-double-left" (click)="viewDatePreviousYear()"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
@@ -26,8 +26,8 @@
     class="btn btn-default btn-lg"
     mwlCalendarNextView
     [view]="view"
-    [(viewDate)]="viewDateNextYear">
-    <i class="fa fa-angle-double-right"></i>
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-double-right" (click)="viewDateNextYear()"></i>
   </div>
   <div class="text-center">
     <h3>
