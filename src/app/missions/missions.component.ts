@@ -13,7 +13,7 @@ import { Mission } from './miss.domains';
 export class MissionsComponent implements OnInit {
 
   collegueConnecte: Observable<Collegue>;
-  listeMissions: Mission[] = [];
+  listeMissions: Mission[];
 
   constructor(private authSrv: AuthService, private service: DataService) {
   }
@@ -25,8 +25,13 @@ export class MissionsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
-    this.collegueConnecte.subscribe(
-      value => this.listeMissions = value.missions
+    this.service.recupererMissions().subscribe(
+      value => {
+        this.listeMissions = value;
+        console.log(this.listeMissions);
+      },
+      err => console.log(err),
+      () => { }
     );
   }
 
