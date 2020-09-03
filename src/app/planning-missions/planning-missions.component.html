@@ -35,6 +35,7 @@
     </h3>
   </div>
 </div>
+
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
@@ -42,28 +43,22 @@
     [events]="events"
     [locale]="locale"
     [weekStartsOn]="weekStartsOn"
-    [weekendDays]="weekendDays">
+    [weekendDays]="weekendDays"
+    [cellTemplate]="customCellTemplate">
   </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [locale]="locale"
-    [weekStartsOn]="weekStartsOn"
-    [weekendDays]="weekendDays">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="'day'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [locale]="locale">
-  </mwl-calendar-day-view>
 </div>
 
-
-<div>
-  <ul *ngFor="let mission of listeMissions">
-    <li> Date de début : {{mission.dateDebut}}</li>
-    <li> Nature : {{mission.nature.libelle}}</li>
-  </ul>
-</div>
+<!-- Template calendrier -->
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date |
+      calendarDate:'monthViewDayNumber':locale }}
+    </span>
+  </div>
+  <div class="mission" *ngFor="let event of day.events">
+    <small
+      [style.backgroundColor]="event.color">
+      {{ event.title }}
+    </small>
+  </div>
+</ng-template>
