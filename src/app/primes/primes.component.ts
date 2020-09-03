@@ -1,4 +1,4 @@
-import { missionMock } from './mock.mission';
+
 import { Mission } from './../missions/miss.domains';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { Label, Color } from 'ng2-charts';
 export class PrimesComponent implements OnInit {
 
   constructor(private authSrv: AuthService) {
-    this.listeMissions = missionMock;
+
   }
 
   listeMissions: Mission[];
