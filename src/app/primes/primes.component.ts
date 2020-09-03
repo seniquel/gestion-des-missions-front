@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
-import { ChartOptions, ChartType, ChartDataSets, ChartColor, BorderWidth } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 
 @Component({
@@ -36,7 +36,6 @@ export class PrimesComponent implements OnInit {
       backgroundColor: ['rgba(77,83,96,0.2)'],
     },
   ];
-  barChartWidth: BorderWidth = 2;
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
