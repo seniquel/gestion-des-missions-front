@@ -1,5 +1,4 @@
 import { LigneDeFrais } from './ligneFrais.domain';
-
 /*
 * Note de frais d'une mission
 */
