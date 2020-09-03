@@ -25,6 +25,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -51,7 +52,8 @@ registerLocaleData(localeFr);
     HttpClientModule,
     FormsModule,
     NgbModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    ChartsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
