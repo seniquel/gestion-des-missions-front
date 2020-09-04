@@ -49,7 +49,7 @@ export class PrimesComponent implements OnInit {
 
     setTimeout(() => {
       this.listeAnnee = this.recupererAnnee();
-    }, 2000);
+    }, 1000);
 
 
   }

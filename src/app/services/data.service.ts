@@ -31,6 +31,7 @@ export class DataService {
       httpOptions
     ).subscribe((data: any) => {
       console.log(data);
+      alert(`Fichier créé dans le dossier : "C:/Users/[UTILISATEUR]/primes"`);
     }, (error: HttpErrorResponse) => {
       console.log('error', error);
       alert('Le fichier n\'a pas pu être créé !');
