@@ -22,8 +22,8 @@
           <td>{{mission.villeDepart}}</td>
           <td>{{mission.villeArrivee}}</td>
           <td>{{mission.transport}}</td>
-          <td><i class='fas fa-thumbs-up' id="up" ngbTooltip="Valider"></i><i class='fas fa-thumbs-down' id="down"
-              ngbTooltip="Rejeter"></i></td>
+          <td><i class='fas fa-thumbs-up' id="up" ngbTooltip="Valider" (click)="validation(mission)"></i><i
+              class='fas fa-thumbs-down' id="down" ngbTooltip="Rejeter" (click)="rejet(mission)"></i></td>
         </tr>
       </tbody>
     </table>

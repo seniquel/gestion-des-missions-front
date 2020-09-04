@@ -1,8 +1,8 @@
+import { Mission } from './../missions/miss.domains';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
-import { Mission } from '../missions/miss.domains';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -26,6 +26,39 @@ export class ValidationMissionsComponent implements OnInit {
       err => console.log(err),
       () => { }
     );
+  }
+
+  validation(mission: Mission): void {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.service.validationMission(mission, 'valid'));
+      }, 1000);
+    });
+    const listeTemp: Mission[] = [];
+    promise.then(() => {
+      this.listeMissions.forEach(mis => {
+        if (!mis.uuid.includes(mission.uuid)) {
+          listeTemp.push(mis);
+        }
+      });
+    }).then(() => this.listeMissions = listeTemp);
+
+  }
+
+  rejet(mission: Mission): void {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.service.validationMission(mission, 'rejet'));
+      }, 1000);
+    });
+    const listeTemp: Mission[] = [];
+    promise.then(() => {
+      this.listeMissions.forEach(mis => {
+        if (!mis.uuid.includes(mission.uuid)) {
+          listeTemp.push(mis);
+        }
+      });
+    }).then(() => this.listeMissions = listeTemp);
   }
 
 }
