@@ -18,6 +18,10 @@ export class DataService {
     return this.http.get<Mission[]>(`${this.URL_BACKEND}collegues/me/missions`);
   }
 
+  recupererMissionsParAnnee(annee: number): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.URL_BACKEND}missions/${annee}/prime`);
+  }
+
   creerFichierExcel(annee: number): void {
     const httpOptions = {
       headers: new HttpHeaders({

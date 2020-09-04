@@ -68,29 +68,26 @@ export class PrimesComponent implements OnInit {
 
   onChange(): void {
     this.selectionMissionParAnnee();
-    this.changeTitre();
-    this.changeData();
-    this.changeLabel();
+    setTimeout(() => {
+      this.changeTitre();
+      this.changeData();
+      this.changeLabel();
+    }, 1000);
+
   }
 
   selectionMissionParAnnee(): void {
     this.missionsSelect = [];
-    const currentTime: Date = new Date();
-    for (let i = 0; i < this.listeMissions.length; i++) {
-      const dateFin2: Date = new Date(this.listeMissions[i].dateFin);
-      if (dateFin2.getFullYear() == this.anneeSelect && this.anneeSelect == currentTime.getFullYear()) {
-        if (dateFin2.getMonth() < currentTime.getMonth()) {
-          this.missionsSelect.push(this.listeMissions[i]);
-        }
-        else if (dateFin2.getMonth() == currentTime.getMonth() && dateFin2.getDate() < currentTime.getDate()) {
-          this.missionsSelect.push(this.listeMissions[i]);
-        }
-      }
-      else if (dateFin2.getFullYear() == this.anneeSelect && this.anneeSelect < currentTime.getFullYear()) {
-        this.missionsSelect.push(this.listeMissions[i]);
-      }
-    }
+    this.service.recupererMissionsParAnnee(this.anneeSelect).subscribe(
+      value => {
+        this.missionsSelect = value;
+      },
+      err => console.log(err),
+      () => { }
+    );
   }
+
+
 
   changeTitre(): void {
     this.barChartOptions = {
