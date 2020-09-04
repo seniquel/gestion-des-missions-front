@@ -6,29 +6,22 @@
           <a class="nav-link" routerLink="/accueil" routerLinkActive="active">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/gestion-missions"
-            routerLinkActive="active">Gestion des missions</a>
+          <a class="nav-link" routerLink="/gestion-missions" routerLinkActive="active">Gestion des missions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/planning-missions"
-            routerLinkActive="active">Planning des missions</a>
+          <a class="nav-link" routerLink="/planning-missions" routerLinkActive="active">Planning des missions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/primes"
-            routerLinkActive="active">Primes</a>
+          <a class="nav-link" routerLink="/primes" routerLinkActive="active">Primes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/note-de-frais"
-            routerLinkActive="active">Saisie note de frais</a>
+          <a class="nav-link" routerLink="/note-de-frais" routerLinkActive="active">Saisie note de frais</a>
         </li>
-        <li class="nav-item" *ngIf="col.role == 'ROLE_MANAGER' ||
-          col.role == 'ROLE_ADMINISTRATEUR'">
-          <a class="nav-link" routerLink="/validation-missions"
-            routerLinkActive="active">Validation des missions</a>
+        <li class="nav-item" *ngIf="col.role == 'ROLE_MANAGER'">
+          <a class="nav-link" routerLink="/validation-missions" routerLinkActive="active">Validation des missions</a>
         </li>
         <li class="nav-item" *ngIf="col.role == 'ROLE_ADMINISTRATEUR'">
-          <a class="nav-link" routerLink="/nature-missions"
-            routerLinkActive="active">Nature des missions</a>
+          <a class="nav-link" routerLink="/nature-missions" routerLinkActive="active">Nature des missions</a>
         </li>
       </ul>
     </ng-container>
