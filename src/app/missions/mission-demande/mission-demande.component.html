@@ -1,60 +1,88 @@
 <h1 class="text-center">Demande de mission</h1>
-<form>
+<form #etatForm="ngForm">
   <div class="col-12 col-md-8 form-group">
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Date de début : </p>
       </div>
       <div class="col">
-        <input type="date" class="form-control" required>
+        <input type="date" class="form-control" name="dateDebut" [(ngModel)]="mission.dateDebut"
+          #etatDateDebut="ngModel" required>
+        <div *ngIf="etatDateDebut.dirty && etatDateDebut.invalid" class="float-right text-danger">La date est invalide.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Date de fin : </p>
       </div>
       <div class="col">
-        <input type="date" class="form-control" required>
+        <input type="date" class="form-control" name="dateFin" [(ngModel)]="mission.dateFin" #etatDateFin="ngModel"
+          required>
+        <div *ngIf="etatDateFin.dirty && etatDateFin.invalid" class="float-right text-danger">La date est invalide.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Nature : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <select class="custom-select" name="nature" [(ngModel)]="natureSelectionee" #etatNature="ngModel" required>
+          <option selected value="">Choisissez une nature de mission</option>
+          <option *ngFor="let nat of listeNatures" [ngValue]="nat">{{nat.libelle}}</option>
+        </select>
+        <div *ngIf="etatNature.dirty && etatNature.invalid" class="float-right text-danger">Veuillez sélectionner une
+          nature.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Ville de départ : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" name="villeDepart" [(ngModel)]="mission.villeDepart"
+          #etatVilleDepart="ngModel" placeholder="Entrez la ville de départ" required minlength=2>
+        <div *ngIf="etatVilleDepart.dirty && etatVilleDepart.invalid" class="float-right text-danger">La ville de départ
+          est invalide.</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Ville d'arrivée : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" name="villeArrivee" [(ngModel)]="mission.villeArrivee"
+          #etatVilleArrivee="ngModel" placeholder="Entrez la ville d'arrivée" required minlength=2>
+        <div *ngIf="etatVilleArrivee.dirty && etatVilleArrivee.invalid" class="float-right text-danger">La ville
+          d'arrivée
+          est invalide.</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Transport : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <div class="form-input mb-3">
+          <select class="custom-select" name="transport" [(ngModel)]="mission.transport" #etatTransport="ngModel" required>
+            <option selected value="">Choisissez le mode de transport</option>
+            <option value="AVION">Avion</option>
+            <option value="TRAIN">Train</option>
+            <option value="COVOITURAGE">Covoiturage</option>
+            <option value="VOITURE_DE_SERVICE">Voiture de service</option>
+            <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez sélectionner un mode de transport</div>
+          </select>
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2" *ngIf="natureSelectionee.versementPrime">
       <div class="col">
         <p>Estimation prime : </p>
       </div>
       <div class="col">
-        <p>0 €</p>
+        <p>{{estimationPrime()}} €</p>
       </div>
     </div>
 
@@ -65,7 +93,10 @@
       <button class="btn btn-danger" routerLink="/gestion-missions">Annuler</button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-success">Valider</button>
+      <button type="ngbButton" class="btn btn-success" *ngIf="etatForm.valid"
+      (click)="validerMission()">Valider</button>
+    <button type="ngbButton" class="btn btn-secondary" *ngIf="!etatForm.valid"
+      disabled>Valider</button>
     </div>
   </div>
 
