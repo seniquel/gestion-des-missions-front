@@ -21,10 +21,8 @@ const routes: Routes = [
   { path: 'planning-missions', component: PlanningMissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'primes', component: PrimesComponent, canActivate: [StatutConnecteService] },
   { path: 'note-de-frais', component: NoteDeFraisComponent, canActivate: [StatutConnecteService] },
-  { path: 'validation-missions', component: ValidationMissionsComponent, canActivate: [StatutConnecteService] },
-  // /validation-mission accessible si manager
-  { path: 'nature-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] },
-  // /nature-missions accessible si admin
+  { path: 'validation-missions', component: ValidationMissionsComponent, canActivate: [StatutConnecteService] }, // /validation-mission accessible si manager ou admin
+  { path: 'nature-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] }, // /nature-missions accessible si admin
   { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-modification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
