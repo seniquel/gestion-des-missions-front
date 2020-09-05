@@ -2,11 +2,11 @@
 <!-- résumé des infos de la mission -->
 <div class="row">
   <div class="col-3">
-      <p class="text-sm-right">
-        Date de début :<br />
-        Date de fin :<br />
-        Nature :
-      </p>
+    <p class="text-sm-right">
+      Date de début :<br />
+      Date de fin :<br />
+      Nature :
+    </p>
   </div>
   <div class="col-3">
     <p class="text-sm-left">
@@ -21,21 +21,21 @@
       Ville de départ :<br />
       Ville d'arrivée :
     </p>
-</div>
-<div class="col-3">
-  <p class="text-sm-left">
-    {{mission.prime}} €<br />
-    {{mission.villeDepart}} <br />
-    {{mission.villeArrivee}}
-  </p>
-</div>
+  </div>
+  <div class="col-3">
+    <p class="text-sm-left">
+      {{mission.prime}} €<br />
+      {{mission.villeDepart}} <br />
+      {{mission.villeArrivee}}
+    </p>
+  </div>
 </div>
 <table class="table table-striped" *ngIf="collegueConnecte | async as col">
   <thead>
     <tr>
       <th scope="col">Date</th>
       <th scope="col">Nature</th>
-      <th scope="col">Monant</th>
+      <th scope="col">Montant</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -43,9 +43,26 @@
     <tr *ngFor="let ligne of mission.noteDeFrais.lignesDeFrais">
       <td>{{ligne.date}}</td>
       <td>{{ligne.nature}}</td>
-      <td>{{ligne.montant}}</td>
-      <td><i *ngIf="mission.noteDeFrais" style='font-size:24px' class='fas'
-          [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i></td>
+      <td>{{ligne.montant}} €</td>
+      <td>
+        <i style='font-size:24px' class='fas' (click)="modifierLigne(mission.noteDeFrais.uuid,
+        mission.dateDebut,
+        mission.dateFin,
+        mission.nature.plafondFrais,
+        mission.nature.depassementFrais,
+        mission.prime,
+        mission.noteDeFrais.fraisTotal,
+        ligne)">&#xf304;</i>
+        <i style='font-size:24px' class='fas fa-trash' (click)="supprimerLigne(ligne)"></i>
+      </td>
     </tr>
   </tbody>
 </table>
+<button (click)="ajouterLigne(mission.noteDeFrais.uuid,
+                              mission.dateDebut,
+                              mission.dateFin,
+                              mission.nature.plafondFrais,
+                              mission.nature.depassementFrais,
+                              mission.prime,
+                              mission.noteDeFrais.fraisTotal)">
+  <i style='font-size:24px' class='fas fa-plus'></i></button>

@@ -12,7 +12,7 @@ import { DataService } from '../services/data.service';
 })
 export class NoteDeFraisComponent implements OnInit {
   collegueConnecte: Observable<Collegue>;
-  listeMissions: Mission[];
+  listeMissions: Mission[] = [];
   dateAujourdHui = new Date();
   constructor(private authSrv: AuthService, private service: DataService) { }
 

@@ -1,0 +1,45 @@
+<mat-toolbar>
+  {{ligneService.form.controls['uuid'].value?"Modifier une ligne":"Ajouter une ligne"}}
+</mat-toolbar>
+<form [formGroup]="ligneService.form" class="normal-form">
+  <mat-grid-list cols="3" rowHeight="200px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="uuid">
+        <mat-form-field>
+          <input type="date" formControlName="date" matInput [matDatepicker]="picker" placeholder="Date*"
+            [min]="ligneService.dateDebut" [max]="ligneService.dateFin">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>La date doit être renseignée.</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="nature" matInput placeholder="Nature*">
+          <mat-error>La nature doit être renseignée.</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input type="number" formControlName="montant" matInput placeholder="Montant*" [max]="ligneService.montantMax">
+          <mat-error *ngIf="ligneService.form.controls['montant'].errors?.required">Le montant doit être renseigné.
+          </mat-error>
+          <mat-error *ngIf="ligneService.form.controls['montant'].errors?.min">Le montant doit être supérieur à 0.
+          </mat-error>
+          <mat-error *ngIf="ligneService.form.controls['montant'].errors?.max">Le montant ne doit pas dépasser le
+            maximum possible.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="ligneService.form.invalid" (click)="envoyerDonnees()">Valider</button>
+      <button mat-raised-button color="warn" (click)="fermer()">Annuler</button>
+    </div>
+  </mat-grid-list>
+</form>

@@ -25,7 +25,7 @@
       <!-- TODO : trouver moyen de comparer sans le getDate() -->
       <!-- de base, toutes les missions ont une note de frais.
       On ne peut la modifier (ajouter des lignes) que si la date de fin de la mission < dateAujourd'hui-->
-      <td><i *ngIf="mission.noteDeFrais" style='font-size:24px' class='fas'
+      <td><i *ngIf="mission.dateFin" style='font-size:24px' class='fas'
         [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i></td>
     </tr>
   </tbody>

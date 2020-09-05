@@ -1,4 +1,4 @@
-import { LigneDeFrais } from './ligneFrais.domain';
+import { LigneDeFrais } from './ligne-de-frais/ligneFrais.domain';
 /*
 * Note de frais d'une mission
 */
