@@ -13,9 +13,10 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class MissionDemandeComponent implements OnInit {
 
+  dateActuelle: Date = new Date();
   mission: MissionDto = {
-    dateDebut: new Date(),
-    dateFin: new Date(),
+    dateDebut: this.dateActuelle,
+    dateFin: this.dateActuelle,
     villeDepart: '',
     villeArrivee: '',
     prime: 0.00,
@@ -79,4 +80,12 @@ export class MissionDemandeComponent implements OnInit {
 
     return prime;
   }
+
+  dateValide(): boolean {
+    const msParJour: number = 1000 * 60 * 60 * 24;
+    const debut: number = new Date(this.mission.dateDebut).getTime();
+    const fin: number = new Date(this.mission.dateFin).getTime();
+    return fin > debut;
+  }
+
 }
