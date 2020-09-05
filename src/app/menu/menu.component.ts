@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class MenuComponent implements OnInit {
 
   roleCollegue: Observable<Collegue>;
+  isMenuCollapsed = true;
 
   constructor(private authSrv: AuthService) { }
 
