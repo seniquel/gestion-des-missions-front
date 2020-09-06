@@ -29,6 +29,14 @@ export class DataService {
     return this.http.get<Mission[]>(`${this.URL_BACKEND}missions/validation`);
   }
 
+  recupererMissionsCurrent(): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.URL_BACKEND}missions/current`);
+  }
+
+  recupererMissionsFutur(): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.URL_BACKEND}missions/futur`);
+  }
+
   creerFichierExcel(annee: number): void {
     const httpOptions = {
       headers: new HttpHeaders({

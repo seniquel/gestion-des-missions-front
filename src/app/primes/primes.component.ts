@@ -39,6 +39,7 @@ export class PrimesComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
+
     this.service.recupererMissions().subscribe(
       value => {
         this.listeMissions = value;
@@ -50,6 +51,7 @@ export class PrimesComponent implements OnInit {
     setTimeout(() => {
       this.listeAnnee = this.recupererAnnee();
     }, 1000);
+
 
 
   }
@@ -69,11 +71,10 @@ export class PrimesComponent implements OnInit {
   onChange(): void {
     this.selectionMissionParAnnee();
     setTimeout(() => {
-      this.changeTitre();
       this.changeData();
+      this.changeTitre();
       this.changeLabel();
     }, 1000);
-
   }
 
   selectionMissionParAnnee(): void {
