@@ -8,7 +8,6 @@ import { subYears, addYears } from 'date-fns';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { colors } from './colors-events';
-import { title } from 'process';
 
 @Component({
   selector: 'app-planning-missions',
@@ -32,12 +31,10 @@ export class PlanningMissionsComponent implements OnInit {
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   CalendarView = CalendarView;
 
-  // Listes des missions du collègue
   collegueConnecte: Observable<Collegue>;
   listeMissions: Mission[] = [];
 
-  events: CalendarEvent[] = [
-  ];
+  events: CalendarEvent[] = [];
 
   viewDatePreviousYear(): void {
     this.viewDate = subYears(new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, this.viewDate.getDay()), 1);
@@ -54,8 +51,11 @@ export class PlanningMissionsComponent implements OnInit {
   constructor(private authServ: AuthService, private dataServ: DataService) { }
 
   ngOnInit(): void {
+
+    // Collègue authentifié
     this.collegueConnecte = this.authServ.collegueConnecteObs;
 
+    // Récupération missions
     this.dataServ.recupererMissions().subscribe(
       missions => {
         this.listeMissions = missions,
@@ -64,17 +64,29 @@ export class PlanningMissionsComponent implements OnInit {
               this.events.push(
                 {
                   title: mission.nature.libelle,
-                  color: colors.mission,
+                  color: colors.bleu,
                   start: new Date(mission.dateDebut)
                 }
               );
-              console.log(this.viewDate);
             }
           );
       },
       err => console.log(err)
     );
 
+    // Récupération jours feriés
+    this.dataServ.recupererJoursFeries().subscribe(
+      feries => {
+        for (const [date, jour] of Object.entries(feries)) {
+          this.events.push(
+            {
+              title: jour.toString(),
+              color: colors.vert,
+              start: new Date(date)
+            }
+          );
+        }
+      }
+    );
   }
-
 }
