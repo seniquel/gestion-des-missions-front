@@ -11,13 +11,14 @@ export function verifierDoublon(lignes: LigneDeFrais[]) {
   return (group: FormGroup): { [key: string]: any } => {
     const dateToCheck = group.get('date').value;
     const natureToCheck = group.get('nature').value;
+    const idToNotCheck = group.get('uuid').value;
     const lignesDoublon: LigneDeFrais[] = lignes
+      .filter(element => element.uuid !== idToNotCheck)
       .filter(element => element.nature === natureToCheck)
       .filter(element => new Date(element.date).getDate() === new Date(dateToCheck).getDate());
-    if (lignesDoublon.toString() !== '' ) {
-      console.log('doublon');
+    if (lignesDoublon.toString() !== '') {
       return {
-        'doublon': true
+        doublon: true
       };
     }
   };
