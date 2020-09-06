@@ -36,6 +36,7 @@
   </div>
 </div>
 
+<!-- <div *ngIf="events | async; let events"> -->
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
@@ -47,6 +48,7 @@
     [cellTemplate]="customCellTemplate">
   </mwl-calendar-month-view>
 </div>
+<!-- </div> -->
 
 <!-- Template calendrier -->
 <ng-template #customCellTemplate let-day="day" let-locale="locale">
@@ -55,10 +57,12 @@
       calendarDate:'monthViewDayNumber':locale }}
     </span>
   </div>
-  <div class="mission" *ngFor="let event of day.events">
-    <small
-      [style.backgroundColor]="event.color">
-      {{ event.title }}
-    </small>
+  <div *ngFor="let event of day.events">
+    <div [className]="event.colors['primary'] == '#6FA8DC' ? 'missions':
+      'joursFeries'">
+      <small>
+        {{ event.title }}
+      </small>
+    </div>
   </div>
 </ng-template>

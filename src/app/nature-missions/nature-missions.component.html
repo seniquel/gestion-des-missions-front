@@ -1,1 +1,31 @@
-<p>nature-missions works!</p>
+<h1 class="text-center">Nature de mission</h1>
+
+<div class="row">
+  <div class="table-responsive">
+    <!--Tableau récapitulatif-->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nature</th>
+          <th>Facturée</th>
+          <th>Prime</th>
+          <th>TJM(€)</th>
+          <th>%Prime</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nature of listeNatures">
+          <td>{{nature.libelle}}</td>
+          <td>{{nature.payee ? 'OUI' : 'NON'}}</td>
+          <td>{{nature.versementPrime ? 'OUI' : 'NON'}}</td>
+          <td>{{nature.tjm}}</td>
+          <td>{{nature.pourcentagePrime}}</td>
+          <td><i style='font-size:24px' class='fas' id="edit">&#xf304;</i><i style='font-size:24px'
+              class='fas'>&#xf2ed;</i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h5 class="text-right">Ajouter une nature de mission <button class="btn btn-info">+</button></h5>
