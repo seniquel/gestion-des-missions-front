@@ -1,3 +1,4 @@
+<!-- En-tête calendrier -->
 <h1 class="text-center">Planning des Missions</h1>
 <br>
 <div class="row">
@@ -14,6 +15,12 @@
     [view]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-left"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarToday
+    [(viewDate)]="viewDate">
+    <i class="fa fa-calendar"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
@@ -35,8 +42,6 @@
     </h3>
   </div>
 </div>
-
-<!-- <div *ngIf="events | async; let events"> -->
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
@@ -48,7 +53,6 @@
     [cellTemplate]="customCellTemplate">
   </mwl-calendar-month-view>
 </div>
-<!-- </div> -->
 
 <!-- Template calendrier -->
 <ng-template #customCellTemplate let-day="day" let-locale="locale">
@@ -58,7 +62,7 @@
     </span>
   </div>
   <div *ngFor="let event of day.events">
-    <div [className]="event.colors['primary'] == '#6FA8DC' ? 'missions':
+    <div [className]="event.color == this.couleurMission ? 'missions':
       'joursFeries'">
       <small>
         {{ event.title }}

@@ -30,6 +30,8 @@ export class PlanningMissionsComponent implements OnInit {
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   CalendarView = CalendarView;
+  couleurMission: any = colors.mission;
+  couleurJoursFeries: any = colors.joursFeries;
 
   collegueConnecte: Observable<Collegue>;
   listeMissions: Mission[] = [];
@@ -56,6 +58,8 @@ export class PlanningMissionsComponent implements OnInit {
     this.collegueConnecte = this.authServ.collegueConnecteObs;
 
     // Récupération missions
+
+    // Récupération missions
     this.dataServ.recupererMissions().subscribe(
       missions => {
         this.listeMissions = missions,
@@ -64,7 +68,7 @@ export class PlanningMissionsComponent implements OnInit {
               this.events.push(
                 {
                   title: mission.nature.libelle,
-                  color: colors.bleu,
+                  color: this.couleurMission,
                   start: new Date(mission.dateDebut)
                 }
               );
@@ -81,9 +85,9 @@ export class PlanningMissionsComponent implements OnInit {
           this.events.push(
             {
               title: jour.toString(),
-              color: colors.vert,
+              color: this.couleurJoursFeries,
               start: new Date(date)
-            }
+            },
           );
         }
       }
