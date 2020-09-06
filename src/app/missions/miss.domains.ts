@@ -3,6 +3,7 @@ import { Nature } from './../nature-missions/nature.domain';
  * Mission d'un utilisateur
  */
 export class Mission {
+  uuid: string;
   dateDebut: Date;
   dateFin: Date;
   villeDepart: string;
