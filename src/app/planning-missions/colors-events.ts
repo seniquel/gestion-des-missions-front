@@ -1,10 +1,10 @@
 export const colors: any = {
-  ferie: {
-    primary: '#00FF00',
-    secondary: '#D1FFE8',
-  },
-  mission: {
-    primary: '#0000FF',
+  bleu: {
+    primary: '#6FA8DC',
     secondary: '#D1E8FF',
+  },
+  vert: {
+    primary: '#6FDCA8',
+    secondary: '#D1FFE8',
   },
 };
