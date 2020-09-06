@@ -1,1 +1,42 @@
-<h1 class="text-center">Bienvenue sur l'application GDM</h1>
+<h5 class="text-center">Bienvenue sur GDM</h5>
+<h6 class="text-center">Application de Gestion des Missions</h6>
+
+<div>
+  <p>Conçu pour faciliter la gestion des missions au sein de votre entreprise. Créez, Modifiez, Validez, Visualisez des
+    missions en toute simplicité !</p>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Votre situation</h5>
+      </div>
+      <div class="card-body" *ngIf="listeMissionsCurrent && listeMissionsFutur">
+        <p>Vous avez {{listeMissionsCurrent.length}} mission(s) en cours et {{listeMissionsFutur.length}} mission(s)
+          future(s) !</p>
+        <p>Mission(s) en cours :</p>
+        <ul *ngFor="let mission of listeMissionsCurrent">
+          <li>{{mission.dateDebut}} - {{mission.dateFin}} - {{mission.nature.libelle}}</li>
+        </ul>
+        <p>Mission(s) à venir :</p>
+        <ul *ngFor="let mission of listeMissionsFutur">
+          <li>{{mission.dateDebut}} - {{mission.dateFin}} - {{mission.nature.libelle}}</li>
+        </ul>
+        <a class="btn btn-light" routerLink="/gestion-missions">Gérer mes missions</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Planning</h5>
+      </div>
+      <img src="./assets/calendar1.jpg" class="img-fluid" alt="planning" routerLink="/planning-missions">
+      <div class="card-body">
+        <p>Afficher le planning des missions !</p>
+      </div>
+
+    </div>
+  </div>
+</div>
