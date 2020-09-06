@@ -35,7 +35,7 @@
   </div>
   <!--Diagramme récapitulatif-->
   <div class="col-12 col-lg-6">
-    <div class=" chartjs-container" *ngIf="barChartData">
+    <div class=" chartjs-container" *ngIf="missionsSelect">
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
         [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barColors">
       </canvas>
