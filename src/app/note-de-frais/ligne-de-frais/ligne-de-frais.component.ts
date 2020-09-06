@@ -10,23 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LigneDeFraisComponent implements OnInit {
   constructor(public ligneService: LigneDeFraisService,
-    private dataService: DataService,
-    public dialogRef: MatDialogRef<LigneDeFraisComponent>) { }
+              private dataService: DataService,
+              public dialogRef: MatDialogRef<LigneDeFraisComponent>) { }
 
   ngOnInit(): void {
+    this.ligneService.testerDoublon();
   }
 
   envoyerDonnees() {
     if (this.ligneService.form.valid) {
       console.log(this.ligneService.form.get('uuid').value);
       if (!this.ligneService.form.get('uuid').value) {
-        console.log("ajout");
         this.ligneService.ajouterLigne(this.ligneService.form.get('date').value,
           this.ligneService.form.get('nature').value,
           this.ligneService.form.get('montant').value);
         this.fermer();
       } else {
-        console.log("modif");
         this.ligneService.modifierLigne(this.ligneService.form.get('date').value,
           this.ligneService.form.get('nature').value,
           this.ligneService.form.get('montant').value,
@@ -41,5 +40,4 @@ export class LigneDeFraisComponent implements OnInit {
     this.ligneService.initialiserFormGroup();
     this.dialogRef.close();
   }
-
 }

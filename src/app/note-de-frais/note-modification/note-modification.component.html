@@ -45,24 +45,11 @@
       <td>{{ligne.nature}}</td>
       <td>{{ligne.montant}} €</td>
       <td>
-        <i style='font-size:24px' class='fas' (click)="modifierLigne(mission.noteDeFrais.uuid,
-        mission.dateDebut,
-        mission.dateFin,
-        mission.nature.plafondFrais,
-        mission.nature.depassementFrais,
-        mission.prime,
-        mission.noteDeFrais.fraisTotal,
-        ligne)">&#xf304;</i>
+        <i style='font-size:24px' class='fas' (click)="modifierLigne(mission,ligne)">&#xf304;</i>
         <i style='font-size:24px' class='fas fa-trash' (click)="supprimerLigne(ligne)"></i>
       </td>
     </tr>
   </tbody>
 </table>
-<button (click)="ajouterLigne(mission.noteDeFrais.uuid,
-                              mission.dateDebut,
-                              mission.dateFin,
-                              mission.nature.plafondFrais,
-                              mission.nature.depassementFrais,
-                              mission.prime,
-                              mission.noteDeFrais.fraisTotal)">
+<button (click)="ajouterLigne(mission)">
   <i style='font-size:24px' class='fas fa-plus'></i></button>

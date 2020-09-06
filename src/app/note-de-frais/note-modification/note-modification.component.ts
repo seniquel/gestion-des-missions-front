@@ -54,17 +54,15 @@ export class NoteModificationComponent implements OnInit {
     }
   }
 
-  ajouterLigne(uuid: string,
-    dateDebut: Date,
-    dateFin: Date,
-    plafondFrais: number,
-    depassementPlafond: boolean,
-    prime: number,
-    fraisTotal: number) {
-    this.ligneService.noteDeFraisId = uuid;
-    this.ligneService.dateDebut = new Date(dateDebut);
-    this.ligneService.dateFin = new Date(dateFin);
-    this.ligneService.montantMax = this.calculerMaxFrais(plafondFrais, depassementPlafond, prime, fraisTotal);
+  ajouterLigne(mission: Mission) {
+    this.ligneService.noteDeFraisId = mission.noteDeFrais.uuid;
+    this.ligneService.dateDebut = new Date(mission.dateDebut);
+    this.ligneService.dateFin = new Date(mission.dateFin);
+    this.ligneService.lignesDeFrais = mission.noteDeFrais.lignesDeFrais;
+    this.ligneService.montantMax = this.calculerMaxFrais(mission.nature.plafondFrais,
+      mission.nature.depassementFrais,
+      mission.prime,
+      mission.noteDeFrais.fraisTotal);
     this.ligneService.initialiserFormGroup();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -73,19 +71,16 @@ export class NoteModificationComponent implements OnInit {
     this.dialog.open(LigneDeFraisComponent, dialogConfig);
   }
 
-  modifierLigne(uuid: string,
-    dateDebut: Date,
-    dateFin: Date,
-    plafondFrais: number,
-    depassementPlafond: boolean,
-    prime: number,
-    fraisTotal: number,
-    ligne: LigneDeFrais) {
-    this.ligneService.noteDeFraisId = uuid;
-    this.ligneService.dateDebut = new Date(dateDebut);
-    this.ligneService.dateFin = new Date(dateFin);
+  modifierLigne(mission: Mission, ligne: LigneDeFrais) {
+    this.ligneService.noteDeFraisId = mission.noteDeFrais.uuid;
+    this.ligneService.dateDebut = new Date(mission.dateDebut);
+    this.ligneService.dateFin = new Date(mission.dateFin);
+    this.ligneService.lignesDeFrais = mission.noteDeFrais.lignesDeFrais;
     // calcul du max possible, en enlevant le montant de cette ligne
-    this.ligneService.montantMax = this.calculerMaxFrais(plafondFrais, depassementPlafond, prime, (fraisTotal - ligne.montant));
+    this.ligneService.montantMax = this.calculerMaxFrais(mission.nature.plafondFrais,
+      mission.nature.depassementFrais,
+      mission.prime,
+      (mission.noteDeFrais.fraisTotal - ligne.montant));
     this.ligneService.ajouterInfos(ligne);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -99,7 +94,6 @@ export class NoteModificationComponent implements OnInit {
               ${ligne.date}
               ${ligne.nature}
               ${ligne.montant} ?`)) {
-                console.log("ok on est partiiiiii")
       this.ligneService.supprimerligne(ligne.uuid);
     }
   }

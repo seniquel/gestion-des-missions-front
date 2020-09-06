@@ -25,7 +25,7 @@
       <!-- TODO : changer les >= en <= : laisser comme ça pour tester-->
       <td><i *ngIf="mission.dateFin.getDate() <= dateAujourdHui.getDate()" style='font-size:24px' class='fas'
         [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i>
-        <i *ngIf="mission.dateFin.getDate() >= dateAujourdHui.getDate()" style='font-size:24px' class='fas fa-file-pdf' (click)="genererPdf(mission)"></i></td>
+        <i *ngIf="mission.dateFin.getDate() <= dateAujourdHui.getDate()" style='font-size:24px' class='fas fa-file-pdf' (click)="genererPdf(mission)"></i></td>
     </tr>
   </tbody>
 </table>
