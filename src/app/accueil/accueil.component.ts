@@ -12,7 +12,7 @@ import { MissService } from '../missions/miss.service';
 })
 export class AccueilComponent implements OnInit {
 
-  collegueConnecte: Observable<Collegue>;
+  roleCollegue: Observable<Collegue>;
   listeMissionsCurrent: Mission[];
   listeMissionsFutur: Mission[];
   today: Date = new Date();
@@ -20,7 +20,7 @@ export class AccueilComponent implements OnInit {
   constructor(private authSrv: AuthService, private service: MissService) { }
 
   ngOnInit(): void {
-    this.collegueConnecte = this.authSrv.collegueConnecteObs;
+    this.roleCollegue = this.authSrv.collegueConnecteObs;
     this.service.recupererMissionsCurrent().subscribe(
       mission => {
         this.listeMissionsCurrent = mission;

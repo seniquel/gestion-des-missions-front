@@ -6,37 +6,75 @@
     missions en toute simplicité !</p>
 </div>
 
-<div class="row">
-  <div class="col">
+<div class="row" *ngIf="roleCollegue | async as col">
+  <!--Situation-->
+  <div class="col-12 col-sm-6 col-md-4">
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">Votre situation</h5>
       </div>
       <div class="card-body" *ngIf="listeMissionsCurrent && listeMissionsFutur">
         <p>Vous avez {{listeMissionsCurrent.length}} mission(s) en cours et {{listeMissionsFutur.length}} mission(s)
-          future(s) !</p>
-        <p>Mission(s) en cours :</p>
-        <ul *ngFor="let mission of listeMissionsCurrent">
-          <li>{{mission.dateDebut}} - {{mission.dateFin}} - {{mission.nature.libelle}}</li>
-        </ul>
-        <p>Mission(s) à venir :</p>
-        <ul *ngFor="let mission of listeMissionsFutur">
-          <li>{{mission.dateDebut}} - {{mission.dateFin}} - {{mission.nature.libelle}}</li>
-        </ul>
+          à venir !</p>
+        <div *ngIf="listeMissionsCurrent.length > 0">
+          <p>En cours :</p>
+          <ul *ngFor="let mission of listeMissionsCurrent">
+            <li>Du {{mission.dateDebut | date : 'dd/MM/yyyy'}} au {{mission.dateFin | date : 'dd/MM/yyyy'}} -
+              {{mission.nature.libelle}}</li>
+          </ul>
+        </div>
+        <div *ngIf="listeMissionsFutur.length > 0">
+          <p>À venir :</p>
+          <ul *ngFor="let mission of listeMissionsFutur">
+            <li>Du {{mission.dateDebut | date : 'dd/MM/yyyy'}} au {{mission.dateFin | date : 'dd/MM/yyyy'}} -
+              {{mission.nature.libelle}}</li>
+          </ul>
+        </div>
         <a class="btn btn-light" routerLink="/gestion-missions">Gérer mes missions</a>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">Planning</h5>
-      </div>
-      <img src="./assets/calendar1.jpg" class="img-fluid" alt="planning" routerLink="/planning-missions">
-      <div class="card-body">
-        <p>Afficher le planning des missions !</p>
-      </div>
 
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card" routerLink="/planning-missions">
+      <div class="card-body">
+        <p>Affichez le planning des missions !</p>
+      </div>
+      <img src="./assets/calendar1.jpg" class="img-fluid" alt="planning">
     </div>
   </div>
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card" routerLink="/primes">
+      <div class="card-body">
+        <p>Calculez vos primes !</p>
+      </div>
+      <img src="./assets/chart.jpg" class="img-fluid" alt="chart">
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card" routerLink="/note-de-frais">
+      <div class="card-body">
+        <p>Saisissez vos notes de frais !</p>
+      </div>
+      <img src="./assets/tickets.jpg" class="img-fluid" alt="chart">
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4" *ngIf="col.role == 'ROLE_MANAGER'">
+    <div class="card" routerLink="/validation-missions">
+      <div class="card-body">
+        <p>Validez les missions de vos collègues !</p>
+      </div>
+      <img src="./assets/questions.jpg" class="img-fluid" alt="chart">
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4" *ngIf="col.role == 'ROLE_ADMINISTRATEUR'">
+    <div class="card" routerLink="/nature-missions">
+      <div class="card-body">
+        <p>Gérez la nature des missions !</p>
+      </div>
+      <img src="./assets/natures.jpg" class="img-fluid" alt="chart">
+    </div>
+  </div>
+
 </div>
