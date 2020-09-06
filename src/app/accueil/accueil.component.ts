@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { Mission } from '../missions/miss.domains';
 import { AuthService } from '../auth/auth.service';
-import { MissService } from '../missions/miss.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-accueil',
@@ -17,7 +17,7 @@ export class AccueilComponent implements OnInit {
   listeMissionsFutur: Mission[];
   today: Date = new Date();
 
-  constructor(private authSrv: AuthService, private service: MissService) { }
+  constructor(private authSrv: AuthService, private service: DataService) { }
 
   ngOnInit(): void {
     this.roleCollegue = this.authSrv.collegueConnecteObs;
