@@ -20,6 +20,7 @@ export class DataService {
 
   recupererJoursFeries(): Observable<JoursFeries[]> {
     return this.http.get<JoursFeries[]>(`${this.URL_FRONTEND}jours-feries`);
+  }
 
   recupererMissionsParAnnee(annee: number): Observable<Mission[]> {
     return this.http.get<Mission[]>(`${this.URL_BACKEND}missions/${annee}/prime`);
