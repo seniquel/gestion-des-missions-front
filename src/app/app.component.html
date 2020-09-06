@@ -1,18 +1,13 @@
-<header>
-  <div class="row">
-    <img src="./assets/header-v3.jpg" class="img-fluid" alt="header">
-  </div>
-  <div class="text-right">
-    <ng-container *ngIf="collegueConnecte | async as col">
-      <div class="lead" *ngIf="!col.estAnonyme()">
-        <p>Bienvenue {{col.nom}} ! <i class="fa fa-power-off" (click)="seDeconnecter()" id="deco"
-            ngbTooltip="Déconnection"></i></p>
-      </div>
-    </ng-container>
-  </div>
-</header>
-
-
+<div class="jumbotron">
+  <h1 class="display-4">Super Application</h1>
+  <ng-container *ngIf="collegueConnecte | async as col">
+    <div class="lead" *ngIf="!col.estAnonyme()">
+      <p>Utilisateur connecté : {{col.email}}</p>
+      <p>Rôles : {{col.role}}</p>
+      <button class="btn btn-danger" (click)="seDeconnecter()">Se déconnecter</button>
+    </div>
+  </ng-container>
+</div>
 <main class="container">
   <ng-container *ngIf="collegueConnecte | async as col">
     <div *ngIf="!col.estAnonyme()">

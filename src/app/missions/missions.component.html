@@ -1,4 +1,5 @@
 <h1 class="text-center">Gestion des Missions</h1>
+
 <div class="table-responsive">
   <table class="table table-striped" *ngIf="collegueConnecte | async as col">
     <thead>
@@ -15,8 +16,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let mission of listeMissions">
-        <td>{{mission.dateDebut | date : 'dd/MM/yyyy'}}</td>
-        <td>{{mission.dateFin | date : 'dd/MM/yyyy'}}</td>
+        <td>{{mission.dateDebut}}</td>
+        <td>{{mission.dateFin}}</td>
         <td>{{mission.nature.libelle}}</td>
         <td>{{mission.villeDepart}}</td>
         <td>{{mission.villeArrivee}}</td>
@@ -29,5 +30,4 @@
     </tbody>
   </table>
 </div>
-
 <h5 class="text-right">Demander une mission <button class="btn btn-info" routerLink="/mission-demande">+</button></h5>
