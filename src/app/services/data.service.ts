@@ -1,12 +1,12 @@
 import { LigneDeFraisDto } from './../note-de-frais/ligne-de-frais/ligneDeFraisDto.domain';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Mission } from '../missions/miss.domains';
 import { Observable, Subject } from 'rxjs';
-import { Collegue } from '../auth/auth.domains';
 import { tap } from 'rxjs/operators';
-import { NoteDeFrais } from '../note-de-frais/noteFrais.domain';
+import { JoursFeries } from '../planning-missions/jours-feries.domain';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,10 +14,6 @@ const httpOptions = {
   })
 };
 
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Mission } from '../missions/miss.domains';
-import { Observable } from 'rxjs';
-import { JoursFeries } from '../planning-missions/jours-feries.domain';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,7 +49,8 @@ export class DataService {
 
   supprimerLigne(ligneId: string): Observable<any> {
     return this.http.delete(`${this.URL_BACKEND}lignesDeFrais/${ligneId}`, httpOptions);
-    
+  }
+
   recupererJoursFeries(): Observable<JoursFeries[]> {
     return this.http.get<JoursFeries[]>(`${this.URL_FRONTEND}jours-feries`);
   }
