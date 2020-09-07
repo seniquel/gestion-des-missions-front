@@ -20,11 +20,11 @@
       <td>{{mission.nature.libelle}}</td>
       <td>{{mission.villeDepart}}</td>
       <td>{{mission.villeArrivee}}</td>
-      <td>{{mission.transport}}</td>
+      <td>{{transportToString(mission.transport)}}</td>
       <td>{{mission.statut}}</td>
       <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px' class='fas pointer'
-          routerLink='/mission-modification'>&#xf304;</i>
-          <i (click)="supprimer(mission.uuid)" style='font-size:24px' class='fas pointer'>&#xf2ed;</i>
+        (click)="selectionner(mission.uuid)" routerLink="/mission-modification">&#xf304;</i>
+          <i (click)="supprimer(mission)" style='font-size:24px' class='fas pointer'>&#xf2ed;</i>
         <i *ngIf="mission.nature.libelle == 'Congés payés'" style='font-size:24px' class='fas'>&#xf06e;</i></td>
     </tr>
   </tbody>
