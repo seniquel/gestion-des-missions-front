@@ -31,4 +31,13 @@ export class DataService {
     missionCreee.statut = 'INITIALE';
     return this.http.post<MissionDto>(`${this.URL_BACKEND}collegues/me/missions`, missionCreee);
   }
+
+  modifierMission(missionModifiee: MissionDto, uuid: string): Observable<MissionDto> {
+    missionModifiee.statut = 'INITIALE';
+    return this.http.put<MissionDto>(`${this.URL_BACKEND}collegues/me/missions/${uuid}`, missionModifiee);
+  }
+
+  suppprimerMission(uuid: string): Observable<string> {
+    return this.http.delete<string>(`${this.URL_BACKEND}collegues/me/missions/${uuid}`);
+  }
 }

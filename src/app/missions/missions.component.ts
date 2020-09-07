@@ -28,8 +28,15 @@ export class MissionsComponent implements OnInit {
     this.service.recupererMissions().subscribe(
       value => {
         this.listeMissions = value;
-        console.log(this.listeMissions);
       },
+      err => console.log(err),
+      () => { }
+    );
+  }
+
+  supprimer(uuid: string){
+    this.service.suppprimerMission(uuid).subscribe(
+      () => {},
       err => console.log(err),
       () => { }
     );

@@ -7,10 +7,18 @@
       </div>
       <div class="col">
         <input type="date" class="form-control" name="dateDebut" [(ngModel)]="mission.dateDebut"
-          #etatDateDebut="ngModel" min="{{dateActuelle | date:'yyyy-MM-dd'}}" required>
+          #etatDateDebut="ngModel" min="{{dateDebutMin() | date:'yyyy-MM-dd'}}" required>
         <div *ngIf="etatDateDebut.dirty && etatDateDebut.invalid" class="float-right text-danger">La date est invalide.
         </div>
-        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date de début doit être avant la date de fin.
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date
+          de début doit être avant la date de fin.
+        </div>
+        <div
+          *ngIf="etatDateDebut.dirty && etatDateFin.dirty && dateDebutMin()<mission.dateDebut && mission.transport === 'AVION'"
+          class="float-right text-danger">Prévoyez une anticipation de 7 jours pour effectuer un voyage en avion.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
+          La date ne doit pas se chevaucher avec une autre mission.
         </div>
       </div>
     </div>
@@ -20,10 +28,14 @@
       </div>
       <div class="col">
         <input type="date" class="form-control" name="dateFin" [(ngModel)]="mission.dateFin" #etatDateFin="ngModel"
-        min="{{dateActuelle | date:'yyyy-MM-dd'}}" required>
+          min="{{this.mission.dateDebut | date:'yyyy-MM-dd'}}" required>
         <div *ngIf="etatDateFin.dirty && etatDateFin.invalid" class="float-right text-danger">La date est invalide.
         </div>
-        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date de début doit être avant la date de fin.
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date
+          de début doit être avant la date de fin.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
+          La date ne doit pas se chevaucher avec une autre mission.
         </div>
       </div>
     </div>
@@ -70,13 +82,15 @@
       </div>
       <div class="col">
         <div class="form-input mb-3">
-          <select class="custom-select" name="transport" [(ngModel)]="mission.transport" #etatTransport="ngModel" required>
+          <select class="custom-select" name="transport" [(ngModel)]="mission.transport" #etatTransport="ngModel"
+            required>
             <option selected value="">Choisissez le mode de transport</option>
             <option value="AVION">Avion</option>
             <option value="TRAIN">Train</option>
             <option value="COVOITURAGE">Covoiturage</option>
             <option value="VOITURE_DE_SERVICE">Voiture de service</option>
-            <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez sélectionner un mode de transport</div>
+            <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez
+              sélectionner un mode de transport</div>
           </select>
         </div>
       </div>
@@ -97,10 +111,10 @@
       <button class="btn btn-danger" routerLink="/gestion-missions">Annuler</button>
     </div>
     <div class="col">
-      <button type="ngbButton" class="btn btn-success" *ngIf="etatForm.valid && dateValide()"
-      (click)="validerMission()" routerLink="/gestion-missions">Valider</button>
-    <button type="ngbButton" class="btn btn-secondary" *ngIf="!etatForm.valid || !dateValide()"
-      disabled>Valider</button>
+      <button type="ngbButton" class="btn btn-success" *ngIf="etatForm.valid && formValide()" (click)="validerMission()"
+        routerLink="/gestion-missions">Valider</button>
+      <button type="ngbButton" class="btn btn-secondary" *ngIf="!etatForm.valid || !formValide()"
+        disabled>Valider</button>
     </div>
   </div>
 
