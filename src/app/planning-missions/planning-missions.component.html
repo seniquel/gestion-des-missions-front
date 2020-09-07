@@ -1,3 +1,4 @@
+<!-- En-tête calendrier -->
 <h1 class="text-center">Planning des Missions</h1>
 <br>
 <div class="row">
@@ -5,8 +6,8 @@
     class="btn btn-default btn-lg"
     mwlCalendarPreviousView
     [view]="view"
-    [(viewDate)]="viewDateNextYear">
-    <i class="fa fa-angle-double-left"></i>
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-double-left" (click)="viewDatePreviousYear()"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
@@ -14,6 +15,12 @@
     [view]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-left"></i>
+  </div>
+  <div
+    class="btn btn-default btn-lg"
+    mwlCalendarToday
+    [(viewDate)]="viewDate">
+    <i class="fa fa-calendar"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
@@ -26,8 +33,8 @@
     class="btn btn-default btn-lg"
     mwlCalendarNextView
     [view]="view"
-    [(viewDate)]="viewDateNextYear">
-    <i class="fa fa-angle-double-right"></i>
+    [(viewDate)]="viewDate">
+    <i class="fa fa-angle-double-right" (click)="viewDateNextYear()"></i>
   </div>
   <div class="text-center">
     <h3>
@@ -42,28 +49,24 @@
     [events]="events"
     [locale]="locale"
     [weekStartsOn]="weekStartsOn"
-    [weekendDays]="weekendDays">
+    [weekendDays]="weekendDays"
+    [cellTemplate]="customCellTemplate">
   </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [locale]="locale"
-    [weekStartsOn]="weekStartsOn"
-    [weekendDays]="weekendDays">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="'day'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [locale]="locale">
-  </mwl-calendar-day-view>
 </div>
 
-
-<div>
-  <ul *ngFor="let mission of listeMissions">
-    <li> Date de début : {{mission.dateDebut}}</li>
-    <li> Nature : {{mission.nature.libelle}}</li>
-  </ul>
-</div>
+<!-- Template calendrier -->
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date |
+      calendarDate:'monthViewDayNumber':locale }}
+    </span>
+  </div>
+  <div *ngFor="let event of day.events">
+    <div [className]="event.color == this.couleurMission ? 'missions':
+      'joursFeries'">
+      <small>
+        {{ event.title }}
+      </small>
+    </div>
+  </div>
+</ng-template>
