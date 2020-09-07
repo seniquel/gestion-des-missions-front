@@ -1,0 +1,15 @@
+<mat-toolbar>
+  Confirmation de suppression
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+  <h3>Êtes-vous sûrs de vouloir supprimer cette ligne de frais ?</h3>
+  <ul>
+    <li>Date : {{ ligneASupprimer.date }}</li>
+    <li>Nature : {{ ligneASupprimer.nature }}</li>
+    <li>Montant : {{ ligneASupprimer.montant }} €</li>
+  </ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" type="submit" (click)="supprimerLigne(ligneASupprimer.uuid)" >Valider</button>
+  <button mat-raised-button color="warn" (click)="fermer()">Annuler</button>
+</mat-dialog-actions>
