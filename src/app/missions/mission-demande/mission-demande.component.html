@@ -20,6 +20,13 @@
         <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
           La date ne doit pas se chevaucher avec une autre mission.
         </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateDebutValide()" class="float-right text-danger">
+          La date doit être ultérieure à la date minimale.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateJourOuvrable(mission.dateDebut)"
+          class="float-right text-danger">
+          La mission doit commencer un jour ouvrable.
+        </div>
       </div>
     </div>
     <div class="row py-2">
@@ -37,6 +44,10 @@
         <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
           La date ne doit pas se chevaucher avec une autre mission.
         </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateJourOuvrable(mission.dateFin)"
+          class="float-right text-danger">
+          La mission doit se terminer un jour ouvrable.
+        </div>
       </div>
     </div>
     <div class="row py-2">
@@ -44,9 +55,10 @@
         <p>Nature : </p>
       </div>
       <div class="col">
-        <select class="custom-select" name="nature" [(ngModel)]="natureSelectionee" #etatNature="ngModel" required>
-          <option selected value="">Choisissez une nature de mission</option>
-          <option *ngFor="let nat of listeNatures" [ngValue]="nat">{{nat.libelle}}</option>
+        <select class="custom-select" name="nature" [(ngModel)]="natureSelectionee.uuid" #etatNature="ngModel"
+          (change)="selectionnerNature()" required>
+          <option value="">Choisissez une nature de mission</option>
+          <option *ngFor="let nat of listeNatures" [ngValue]="nat.uuid">{{nat.libelle}}</option>
         </select>
         <div *ngIf="etatNature.dirty && etatNature.invalid" class="float-right text-danger">Veuillez sélectionner une
           nature.
@@ -89,9 +101,12 @@
             <option value="TRAIN">Train</option>
             <option value="COVOITURAGE">Covoiturage</option>
             <option value="VOITURE_DE_SERVICE">Voiture de service</option>
-            <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez
-              sélectionner un mode de transport</div>
           </select>
+          <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez
+            sélectionner un mode de transport</div>
+          <div *ngIf="mission.transport === 'AVION'" class="float-right text-warning small">Un voyage en avion nécessite
+            7
+            jours d'anticipation.</div>
         </div>
       </div>
     </div>
