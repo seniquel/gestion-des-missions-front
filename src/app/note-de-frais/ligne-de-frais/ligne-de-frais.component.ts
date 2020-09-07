@@ -48,7 +48,7 @@ export class LigneDeFraisComponent implements OnInit {
   });
 
 
-  constructor(public ligneService: LigneDeFraisService,
+  constructor(private ligneService: LigneDeFraisService,
     private dataService: DataService,
     public dialogRef: MatDialogRef<LigneDeFraisComponent>,
     public datepipe: DatePipe,
@@ -126,7 +126,5 @@ export class LigneDeFraisComponent implements OnInit {
     this.dataService.modifierLigne(this.ligneDto, ligneId).subscribe();
   }
 
-  supprimerligne(ligneId: string): void {
-    this.dataService.supprimerLigne(ligneId).subscribe();
-  }
+
 }

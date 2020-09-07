@@ -1,3 +1,4 @@
+import { LigneSuppressionComponent } from './../ligne-de-frais/ligne-suppression/ligne-suppression.component';
 import { LigneDeFraisDto } from './../ligne-de-frais/ligneDeFraisDto.domain';
 import { Nature } from './../../nature-missions/nature.domain';
 import { LigneDeFrais } from './../ligne-de-frais/ligneFrais.domain';
@@ -24,10 +25,10 @@ export class NoteModificationComponent implements OnInit {
   noteDeFrais: NoteDeFrais = new NoteDeFrais();
 
   constructor(private authSrv: AuthService,
-    private service: DataService,
-    private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private ligneService: LigneDeFraisService) { }
+              private service: DataService,
+              private activatedRoute: ActivatedRoute,
+              private dialog: MatDialog,
+              private ligneService: LigneDeFraisService) { }
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
@@ -86,11 +87,19 @@ export class NoteModificationComponent implements OnInit {
   }
 
   supprimerLigne(ligne: LigneDeFrais) {
-    if (confirm(`Voulez vous vraiment supprimer cette note :
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.data = {
+      ligneRef: ligne
+    };
+    /*if (confirm(`Voulez vous vraiment supprimer cette note :
               ${ligne.date}
               ${ligne.nature}
               ${ligne.montant} ?`)) {
       this.service.supprimerLigne(ligne.uuid).subscribe();
+      */
+    this.dialog.open(LigneSuppressionComponent, dialogConfig);
     }
-  }
 }

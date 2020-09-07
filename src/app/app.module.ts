@@ -29,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NoteModificationComponent } from './note-de-frais/note-modification/note-modification.component';
 import { LigneDeFraisComponent } from './note-de-frais/ligne-de-frais/ligne-de-frais.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LigneSuppressionComponent } from './note-de-frais/ligne-de-frais/ligne-suppression/ligne-suppression.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -50,6 +51,7 @@ registerLocaleData(localeFr);
     MissionModifComponent,
     NoteModificationComponent,
     LigneDeFraisComponent,
+    LigneSuppressionComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ registerLocaleData(localeFr);
     multi: true,
   }, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [LigneDeFraisComponent]
+  entryComponents: [LigneDeFraisComponent, LigneSuppressionComponent]
 })
 export class AppModule {
 }

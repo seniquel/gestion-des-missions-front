@@ -111,7 +111,9 @@ export class NoteDeFraisComponent implements OnInit {
         }
       }
     };
-    pdfMake.createPdf(DocumentDefinition).download(`mission_${mission.uuid}`);
+    if (confirm(`Voules vous téléchérger ce fichier : \nmission_${mission.uuid}.pdf ?`)) {
+      pdfMake.createPdf(DocumentDefinition).download(`mission_${mission.uuid}`);
+    }
   }
 
 
@@ -121,7 +123,7 @@ export class NoteDeFraisComponent implements OnInit {
       return [`La mission est payée.`,
         `Si le montant de la prime est plus faible que prévu, c'est que vous avez dépassé le plafond des frais`,
         `Prime : ${mission.prime} €`,
-        `Plafon de frais : ${mission.nature.plafondFrais} €`,
+        `Plafond de frais : ${mission.nature.plafondFrais} €`,
         `Frais totaux: ${mission.noteDeFrais.fraisTotal} €`];
     } else {
       return [`Mission non payée`];
