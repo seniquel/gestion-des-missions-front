@@ -1,4 +1,6 @@
+import { NatureService } from './../services/nature.service';
 import { Component, OnInit } from '@angular/core';
+import { Nature } from './nature.domain';
 
 @Component({
   selector: 'app-nature-missions',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NatureMissionsComponent implements OnInit {
 
-  constructor() { }
+  listeNatures: Nature[];
+
+  constructor(private service: NatureService) { }
 
   ngOnInit(): void {
+    this.service.recupererNatures().subscribe(
+      value => {
+        this.listeNatures = value;
+      },
+      err => console.log(err),
+      () => { }
+    );
   }
 
 }

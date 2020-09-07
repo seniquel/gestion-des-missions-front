@@ -1,9 +1,10 @@
-import { Observable, from } from 'rxjs';
+import { DataService } from './../services/data.service';
+import { Observable } from 'rxjs';
 import { Mission } from './../missions/miss.domains';
 import { DateFormatter } from './date-formatter.provider';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarDateFormatter, CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { subYears } from 'date-fns';
+import { subYears, addYears } from 'date-fns';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { colors } from './colors-events';
@@ -24,36 +25,72 @@ export class PlanningMissionsComponent implements OnInit {
 
   // Module calendrier
   view: CalendarView = CalendarView.Month;
-  viewDate = new Date();
-  viewDateNextYear = subYears(new Date(), 1);
+  viewDate: Date = new Date();
   locale = 'fr';
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   CalendarView = CalendarView;
+  couleurMission: any = colors.mission;
+  couleurJoursFeries: any = colors.joursFeries;
 
-  // Missions dans le calendriers
-  events: CalendarEvent[] = [
-    {
-      title: 'Coucou',
-      color: colors.mission,
-      start: new Date(2020, 8, 4),
-    }
-  ];
-
-  // Listes des missions du collègue
   collegueConnecte: Observable<Collegue>;
   listeMissions: Mission[] = [];
+
+  events: CalendarEvent[] = [];
+
+  viewDatePreviousYear(): void {
+    this.viewDate = subYears(new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, this.viewDate.getDay()), 1);
+  }
+
+  viewDateNextYear(): void {
+    this.viewDate = addYears(new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() - 1, this.viewDate.getDay()), 1);
+  }
 
   setView(view: CalendarView) {
     this.view = view;
   }
-  constructor(private authSrv: AuthService) { }
+
+  constructor(private authServ: AuthService, private dataServ: DataService) { }
 
   ngOnInit(): void {
-    this.collegueConnecte = this.authSrv.collegueConnecteObs;
-    this.collegueConnecte.subscribe(
-      value => this.listeMissions = value.missions
+
+    // Collègue authentifié
+    this.collegueConnecte = this.authServ.collegueConnecteObs;
+
+    // Récupération missions
+
+    // Récupération missions
+    this.dataServ.recupererMissions().subscribe(
+      missions => {
+        this.listeMissions = missions,
+          this.listeMissions.map(
+            mission => {
+              this.events.push(
+                {
+                  title: mission.nature.libelle,
+                  color: this.couleurMission,
+                  start: new Date(mission.dateDebut)
+                }
+              );
+            }
+          );
+      },
+      err => console.log(err)
+    );
+
+    // Récupération jours feriés
+    this.dataServ.recupererJoursFeries().subscribe(
+      feries => {
+        for (const [date, jour] of Object.entries(feries)) {
+          this.events.push(
+            {
+              title: jour.toString(),
+              color: this.couleurJoursFeries,
+              start: new Date(date)
+            },
+          );
+        }
+      }
     );
   }
-
 }

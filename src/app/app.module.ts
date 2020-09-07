@@ -30,6 +30,7 @@ import { NoteModificationComponent } from './note-de-frais/note-modification/not
 import { LigneDeFraisComponent } from './note-de-frais/ligne-de-frais/ligne-de-frais.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LigneSuppressionComponent } from './note-de-frais/ligne-de-frais/ligne-suppression/ligne-suppression.component';
+import { ChartsModule } from 'ng2-charts';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -62,7 +63,8 @@ registerLocaleData(localeFr);
     NgbModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ChartsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
