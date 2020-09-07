@@ -26,6 +26,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import { ModalModificationComponent } from './nature-missions/modal-modification/modal-modification.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -45,6 +46,7 @@ registerLocaleData(localeFr);
     MissionsComponent,
     MissionDemandeComponent,
     MissionModifComponent,
+    ModalModificationComponent,
   ],
   imports: [
     BrowserModule,
