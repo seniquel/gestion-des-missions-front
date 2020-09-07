@@ -29,6 +29,7 @@ import { LigneDeFraisComponent } from './note-de-frais/ligne-de-frais/ligne-de-f
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LigneSuppressionComponent } from './note-de-frais/ligne-de-frais/ligne-suppression/ligne-suppression.component';
 import { ChartsModule } from 'ng2-charts';
+import { ModalModificationComponent } from './nature-missions/modal-modification/modal-modification.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -48,6 +49,7 @@ registerLocaleData(localeFr);
     MissionsComponent,
     MissionDemandeComponent,
     MissionModifComponent,
+    ModalModificationComponent,
     NoteModificationComponent,
     LigneDeFraisComponent,
     LigneSuppressionComponent,
