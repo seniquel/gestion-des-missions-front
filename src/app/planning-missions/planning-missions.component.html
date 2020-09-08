@@ -1,18 +1,18 @@
-<!-- En-tête calendrier -->
+d<!-- En-tête calendrier -->
 <h1 class="text-center">Planning des Missions</h1>
 <br>
 <div class="row">
   <div
     class="btn btn-default btn-lg"
     mwlCalendarPreviousView
-    [view]="view"
+    [(view)]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-double-left" (click)="viewDatePreviousYear()"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
     mwlCalendarPreviousView
-    [view]="view"
+    [(view)]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-left"></i>
   </div>
@@ -25,14 +25,14 @@
   <div
     class="btn btn-default btn-lg"
     mwlCalendarNextView
-    [view]="view"
+    [(view)]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-right"></i>
   </div>
   <div
     class="btn btn-default btn-lg"
     mwlCalendarNextView
-    [view]="view"
+    [(view)]="view"
     [(viewDate)]="viewDate">
     <i class="fa fa-angle-double-right" (click)="viewDateNextYear()"></i>
   </div>

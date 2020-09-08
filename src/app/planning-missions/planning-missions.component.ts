@@ -58,8 +58,6 @@ export class PlanningMissionsComponent implements OnInit {
     this.collegueConnecte = this.authServ.collegueConnecteObs;
 
     // Récupération missions
-
-    // Récupération missions
     this.dataServ.recupererMissions().subscribe(
       missions => {
         this.listeMissions = missions,
@@ -69,7 +67,8 @@ export class PlanningMissionsComponent implements OnInit {
                 {
                   title: mission.nature.libelle,
                   color: this.couleurMission,
-                  start: new Date(mission.dateDebut)
+                  start: new Date(mission.dateDebut),
+                  end: new Date(mission.dateFin)
                 }
               );
             }

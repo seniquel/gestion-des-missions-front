@@ -124,11 +124,6 @@ export class DataService {
   }
 
   creerFichierExcel(annee: number): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
 
     // envoie de la requête
     this.http.post(`${this.URL_BACKEND}missions/missions-par-annee`,
@@ -145,11 +140,6 @@ export class DataService {
   }
 
   validationMission(mission: Mission, str: string): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
     this.http.patch(`${this.URL_BACKEND}missions/validation?uuid=${mission.uuid}&str=${str}`,
       httpOptions
     ).subscribe((data: any) => {
