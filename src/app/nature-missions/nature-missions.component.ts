@@ -19,7 +19,7 @@ export class NatureMissionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.recupererNatures().subscribe(
+    this.service.recupererNaturesValides().subscribe(
       value => {
         this.listeNatures = value;
       },
@@ -29,10 +29,6 @@ export class NatureMissionsComponent implements OnInit {
   }
   close(): void {
     this.modalService.dismissAll();
-  }
-
-  valider(): void {
-
   }
 
   select(nature: Nature): void {

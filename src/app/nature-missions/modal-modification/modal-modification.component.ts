@@ -25,7 +25,7 @@ export class ModalModificationComponent implements OnInit {
     this.service.sabonnerANatureSelect().subscribe(
       nat => this.nature = nat
     );
-    this.service.recupererNatures().subscribe(
+    this.service.recupererNaturesValides().subscribe(
       liste => this.listeNatures = liste
     );
 
@@ -36,23 +36,43 @@ export class ModalModificationComponent implements OnInit {
 
   close(): void {
     this.modalService.dismissAll();
+    window.location.reload();
   }
 
   valider(): void {
 
-    let utilise: Boolean = false;
+    let utilise: boolean = false;
     for (let i = 0; i < this.listeMissions.length; i++) {
       if (this.listeMissions[i].nature.libelle.includes(this.nature.libelle)) {
-        utilise == true;
+        utilise = true;
       }
     }
 
-    if (utilise == true) {
-      this.service.updateDateFin(this.nature.uuid);
-      this.service.creerNatureLibelleExistant(this.nature);
+    if (utilise === true) {
+      if (!this.nature.payee) {
+        this.nature.payee = false;
+        this.nature.tjm = 0;
+      }
+      if (!this.nature.versementPrime) {
+        this.nature.versementPrime = false;
+        this.nature.pourcentagePrime = 0;
+      }
+      setTimeout(() => {
+        this.service.creerNatureLibelleExistant(this.nature);
+      }, 1000);
     }
-    else {
-      this.service.updateNature(this.nature);
+    else if (utilise === false) {
+      if (!this.nature.payee) {
+        this.nature.payee = false;
+        this.nature.tjm = 0;
+      }
+      if (!this.nature.versementPrime) {
+        this.nature.versementPrime = false;
+        this.nature.pourcentagePrime = 0;
+      }
+      setTimeout(() => {
+        this.service.updateNature(this.nature);
+      }, 1000);
     }
   }
 

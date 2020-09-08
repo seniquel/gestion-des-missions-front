@@ -32,6 +32,7 @@ export class ModalAjoutComponent implements OnInit {
     this.nouvelNature = new Nature();
     this.nouvelNature.tjm = 0;
     this.nouvelNature.pourcentagePrime = 0;
+    window.location.reload();
   }
 
   valider(): void {
@@ -45,6 +46,7 @@ export class ModalAjoutComponent implements OnInit {
     }
     setTimeout(() => {
       this.service.creerNature(this.nouvelNature);
+      window.location.reload();
     }, 1000);
   }
 

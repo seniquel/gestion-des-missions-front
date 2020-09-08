@@ -22,20 +22,22 @@
             <label for="facture">Facturée</label>
           </div>
           <div class="col">
-            <select [(ngModel)]="nature.payee" class="custom-select" id="facture" name="payee" required>
+            <select [(ngModel)]="nature.payee" class="form-control" id="facture" name="payee" required>
               <option value="">NON</option>
               <option value="true">OUI</option>
             </select>
           </div>
-          <div class="col" *ngIf="nature.payee">
-            <label for="facture">Taux journalier</label>
-          </div>
-          <div class="col">
-            <input [(ngModel)]="nature.tjm" type="text" class="form-control" id="tjm" name="tjm" #tjm="ngModel"
-              required>
-            <p *ngIf="tjm.value < 0 ">
-              Le taux journalier doit être supérieur à 0.
-            </p>
+          <div *ngIf="nature.payee">
+            <div class="col">
+              <label for="facture">Taux journalier</label>
+            </div>
+            <div class="col">
+              <input [(ngModel)]="nature.tjm" type="text" class="form-control" id="tjm" name="tjm" #tjm="ngModel"
+                required>
+              <p *ngIf="tjm.value < 0 " id="invalid">
+                Le taux journalier doit être supérieur à 0.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -49,15 +51,17 @@
               <option value="true">OUI</option>
             </select>
           </div>
-          <div class="col" *ngIf="nature.versementPrime">
-            <label for="pourcentagePrime">Pourcentage prime</label>
-          </div>
-          <div class="col">
-            <input [(ngModel)]="nature.pourcentagePrime" type="text" class="form-control" id="pourcentagePrime"
-              name="pourcentagePrime" #pourcentagePrime="ngModel" required>
-            <p *ngIf="pourcentagePrime.value<0 || pourcentagePrime.value>10">
-              Le pourcentage doit être comprise entre 0 et 10.
-            </p>
+          <div *ngIf="nature.versementPrime">
+            <div class="col">
+              <label for="pourcentagePrime">Pourcentage prime</label>
+            </div>
+            <div class="col">
+              <input [(ngModel)]="nature.pourcentagePrime" type="text" class="form-control" id="pourcentagePrime"
+                name="pourcentagePrime" #pourcentagePrime="ngModel" required>
+              <p *ngIf="pourcentagePrime.value<0 || pourcentagePrime.value>10" id="invalid">
+                Le pourcentage doit être comprise entre 0 et 10.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -68,7 +72,7 @@
           <div class="col">
             <input [(ngModel)]="nature.plafondFrais" type="text" class="form-control" id="plafondFrais"
               name="plafondFrais" required #plafond="ngModel">
-            <p *ngIf="plafond.value < 0 ">
+            <p *ngIf="plafond.value < 0 " id="invalid">
               Le plafond de frais doit être supérieur à 0.
             </p>
           </div>

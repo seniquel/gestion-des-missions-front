@@ -20,8 +20,8 @@ export class NatureService {
 
   constructor(private http: HttpClient) { }
 
-  recupererNatures(): Observable<Nature[]> {
-    return this.http.get<Nature[]>(`${this.URL_BACKEND}natures`);
+  recupererNaturesValides(): Observable<Nature[]> {
+    return this.http.get<Nature[]>(`${this.URL_BACKEND}natures/valides`);
   }
 
   recupererNatureUuid(uuid: string): Observable<Nature> {
@@ -34,14 +34,14 @@ export class NatureService {
       JSON.stringify(nature),
       this.httpOptions
     ).subscribe((data: any) => {
-      alert("Félicitation ! Vous avez créé une nouvelle nature.");
+      alert('Félicitation ! Vous avez créé une nouvelle nature.');
     }, (error: HttpErrorResponse) => {
       console.log('error', error);
-      if (error.status == 409) {
-        alert("Cette nature existe déjà, veuillez modifier la nature dans le tableau !");
+      if (error.status === 409) {
+        alert('Cette nature existe déjà, veuillez modifier la nature dans le tableau !');
       }
-      else if (error.status == 400) {
-        alert("Veuillez remplir tous les champs !");
+      else if (error.status === 400) {
+        alert('Veuillez remplir tous les champs !');
       }
 
     });
@@ -54,11 +54,12 @@ export class NatureService {
       JSON.stringify(nature),
       this.httpOptions
     ).subscribe((data: any) => {
+      this.updateDateFin(nature.uuid);
       alert(`Une nouvelle nature ${nature.libelle} a bien été créé !`);
     }, (error: HttpErrorResponse) => {
       console.log('error', error);
-      if (error.status == 400) {
-        alert("Veuillez remplir tous les champs !");
+      if (error.status === 400) {
+        alert('Veuillez remplir tous les champs !');
       }
 
     });
@@ -71,11 +72,11 @@ export class NatureService {
       JSON.stringify(uuid),
       this.httpOptions
     ).subscribe((data: any) => {
-      alert(`La date de fin à été fixé à aujourd'hui !`);
+      alert(`La date de fin de la nature précédente à été fixé à aujourd'hui !`);
     }, (error: HttpErrorResponse) => {
       console.log('error', error);
-      if (error.status == 400) {
-        alert("Veuillez remplir tous les champs !");
+      if (error.status === 400) {
+        alert('Veuillez remplir tous les champs !');
       }
 
     });
@@ -91,8 +92,8 @@ export class NatureService {
       alert(`La nature existante à été modifiée !`);
     }, (error: HttpErrorResponse) => {
       console.log('error', error);
-      if (error.status == 400) {
-        alert("Veuillez remplir tous les champs !");
+      if (error.status === 400) {
+        alert('Veuillez remplir tous les champs !');
       }
 
     });
