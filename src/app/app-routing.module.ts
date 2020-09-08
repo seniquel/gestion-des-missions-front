@@ -16,15 +16,19 @@ import { NoteDeFraisComponent } from './note-de-frais/note-de-frais.component';
 
 
 const routes: Routes = [
-  { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
+  // /tech accessible uniquement si connecté
+  { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] },
   { path: 'connexion', component: AuthComponent },
   { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
   { path: 'planning-missions', component: PlanningMissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'primes', component: PrimesComponent, canActivate: [StatutConnecteService] },
   { path: 'note-de-frais', component: NoteDeFraisComponent, canActivate: [StatutConnecteService] },
-  { path: 'validation-missions', component: ValidationMissionsComponent, canActivate: [StatutConnecteService] }, // /validation-mission accessible si manager ou admin
-  { path: 'nature-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] }, // /nature-missions accessible si admin
+  // /validation-mission accessible si manager ou admin
+  { path: 'validation-missions', component: ValidationMissionsComponent, canActivate: [StatutConnecteService] },
+  // /nature-missions accessible si admin
+  { path: 'nature-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'gestion-missions', component: MissionsComponent, canActivate: [StatutConnecteService] },
+  { path: 'traitement-missions', component: NatureMissionsComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-demande', component: MissionDemandeComponent, canActivate: [StatutConnecteService] },
   { path: 'mission-modification', component: MissionModifComponent, canActivate: [StatutConnecteService] },
   { path: 'note-modification/:uuid', component: NoteModificationComponent, canActivate: [StatutConnecteService] },
