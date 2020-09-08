@@ -4,7 +4,6 @@ export class Nature {
   payee: boolean;
   tjm: number;
   versementPrime: boolean;
-  tjm: number;
   pourcentagePrime: number;
   debutValidite: Date;
   finValidite: Date;

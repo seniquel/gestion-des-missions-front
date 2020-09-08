@@ -35,7 +35,7 @@ export class NoteModificationComponent implements OnInit {
 
     this.activatedRoute.paramMap.subscribe(
       (params: ParamMap) => {
-        this.service.selectionnerMission(params.get('uuid')).subscribe(
+        this.service.selectionnerMissionParUuid(params.get('uuid')).subscribe(
           miss => this.mission = miss,
           err => { },
           () => { }

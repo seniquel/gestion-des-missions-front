@@ -74,11 +74,12 @@ export class DataService {
 
   sabonnerAListeMission(): Observable<Mission[]> {
     return this.subjectListeMissionCourante.asObservable();
+  }
 
   RecupererMissionCourante(uuid: string): Observable<Mission> {
     return this.http.get<Mission>(`${this.URL_BACKEND}missions/${uuid}`);
   }
-  selectionnerMission(uuid: string): Observable<Mission> {
+  selectionnerMissionParUuid(uuid: string): Observable<Mission> {
     return this.RecupererMissionCourante(uuid).pipe(
       tap(mission => this.subjectMission.next(mission))
     );
