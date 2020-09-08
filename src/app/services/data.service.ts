@@ -103,8 +103,8 @@ export class DataService {
     return this.http.delete(`${this.URL_BACKEND}lignesDeFrais/${ligneId}`, httpOptions);
   }
 
-  recupererJoursFeries(): Observable<JoursFeries[]> {
-    return this.http.get<JoursFeries[]>(`${this.URL_FRONTEND}jours-feries`);
+  recupererJoursFeries(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.URL_FRONTEND}jours-feries`);
   }
 
   recupererMissionsParAnnee(annee: number): Observable<Mission[]> {

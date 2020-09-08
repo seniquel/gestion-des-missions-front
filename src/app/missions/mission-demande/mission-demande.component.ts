@@ -1,3 +1,4 @@
+import { JoursFeries } from './../../planning-missions/jours-feries.domain';
 import { DateAdapter } from 'angular-calendar';
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -30,27 +31,35 @@ export class MissionDemandeComponent implements OnInit {
   collegueConnecte: Observable<Collegue>;
   collegueConnecteData: Collegue;
   listeMissions: Mission[] = [new Mission()];
+  listeFeries: Date[] = [];
 
   constructor(private authSrv: AuthService, private service: DataService) { }
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
-    //Récupération des données du collègue courant
+    // Récupération des données du collègue courant
     this.service.recupererCollegueCourant().subscribe(
       value => this.collegueConnecteData = value,
       err => console.log(err)
     );
-    //Récupération des natures existantes
+    // Récupération des natures existantes
     this.service.recupererNatures().subscribe(
       value => this.listeNatures = value,
       err => console.log(err)
     );
-    //Récupération des missions du collègue courant
+    // Récupération des missions du collègue courant
     this.service.recupererMissions().subscribe(
       value => this.listeMissions = value,
       err => console.log(err)
     );
+    // Récupération jours feriés
+    this.service.recupererJoursFeries().subscribe(
+      feries => this.listeFeries = Object.keys(feries).map(s => new Date(s)),
+      err => console.log(err)
+    );
+
     this.natureSelectionee.uuid = '';
+
   }
 
   selectionnerNature() {
@@ -121,21 +130,35 @@ export class MissionDemandeComponent implements OnInit {
     return debut >= debutMin;
   }
 
-  dateJourOuvrable(date: Date): boolean {
+  dateWeekend(date: Date): boolean {
     const d = new Date(date);
-    const weekend = d.getDay() === 0 || d.getDay() === 6;
-    return !weekend;
+    return d.getDay() === 0 || d.getDay() === 6;
   }
 
-  transportAvion(): boolean {
-    return this.mission.transport === 'AVION';
+  dateFerie(date: Date): boolean {
+    const tDate = new Date(date).getTime();
+    for (const ferie of this.listeFeries) {
+      const tFerie = new Date(ferie).getTime();
+      if (tFerie === tDate) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  formValide(): boolean {
-    return this.dateValide()
-      && this.pasDeChevauchement()
-      && this.dateDebutValide()
-      && this.dateJourOuvrable(this.mission.dateDebut) && this.dateJourOuvrable(this.mission.dateFin);
+  dateJourOuvrable(date: Date): boolean {
+    return !this.dateWeekend(date) && !this.dateFerie(date);
   }
+
+transportAvion(): boolean {
+  return this.mission.transport === 'AVION';
+}
+
+formValide(): boolean {
+  return this.dateValide()
+    && this.pasDeChevauchement()
+    && this.dateDebutValide()
+    && this.dateJourOuvrable(this.mission.dateDebut) && this.dateJourOuvrable(this.mission.dateFin);
+}
 
 }

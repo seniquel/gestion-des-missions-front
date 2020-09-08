@@ -12,6 +12,7 @@ import { Mission } from './miss.domains';
 })
 export class MissionsComponent implements OnInit {
 
+  dateActuelle: Date = new Date(new Date());
   collegueConnecte: Observable<Collegue>;
   listeMissions: Mission[];
 
@@ -71,6 +72,19 @@ export class MissionsComponent implements OnInit {
         return transport;
 
     }
+  }
+
+  missionEnCours(mission: Mission): boolean {
+    const debut: number = new Date(mission.dateDebut).getTime();
+    const fin: number = new Date(mission.dateFin).getTime();
+    const dateActuelle: number = new Date(this.dateActuelle).getTime();
+    return dateActuelle > debut && dateActuelle < fin;
+  }
+
+  missionTerminee(mission: Mission): boolean {
+    const fin: number = new Date(mission.dateFin).getTime();
+    const dateActuelle: number = new Date(this.dateActuelle).getTime();
+    return dateActuelle > fin;
   }
 
 }
