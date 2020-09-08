@@ -47,7 +47,7 @@ export class MissionsComponent implements OnInit {
       err => console.log(err)
     );
     console.log(this.listeMissions.indexOf(mission));
-    this.listeMissions = this.listeMissions.filter(m => m.uuid !== mission.uuid)
+    this.listeMissions = this.listeMissions.filter(m => m.uuid !== mission.uuid);
     this.service.modifListeMissions(this.listeMissions);
   }
 
