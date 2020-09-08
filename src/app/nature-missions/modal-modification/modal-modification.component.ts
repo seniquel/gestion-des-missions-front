@@ -12,7 +12,7 @@ export class ModalModificationComponent implements OnInit {
 
   nature: Nature = new Nature();
 
-  constructor(private service: NatureService, config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
     config.keyboard = false;
   }

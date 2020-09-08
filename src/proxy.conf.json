@@ -9,11 +9,11 @@
     "changeOrigin": true
   },
   "/traitement": {
-    "target": "https://localhost:8080/missions/traitement",
+    "target": "http://localhost:8080/missions/traitement",
     "secure": false,
     "logLevel": "warn",
     "pathRewrite": {
-      "^/jours-feries": ""
+      "^/traitement": ""
     },
     "changeOrigin": true
   }

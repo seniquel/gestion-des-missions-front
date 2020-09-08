@@ -6,14 +6,14 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Nature</th>
-          <th>Facturée</th>
-          <th>Prime</th>
-          <th>TJM(€)</th>
-          <th>%Prime</th>
-          <th>Plafond frais</th>
-          <th>Dépt. frais</th>
-          <th>Actions</th>
+          <th scope="col">Nature</th>
+          <th scope="col">Facturée</th>
+          <th scope="col">Prime</th>
+          <th scope="col">TJM (€)</th>
+          <th scope="col">% Prime</th>
+          <th scope="col">Plafond frais</th>
+          <th scope="col">Dépt. frais</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -26,20 +26,23 @@
           <td>{{nature.plafondFrais}}</td>
           <td>{{nature.depassementFrais ? 'OUI' : 'NON'}}</td>
           <td>
-            <app-modal-modification></app-modal-modification><i style='font-size:24px' class='fas'>&#xf2ed;</i>
+            <app-modal-modification></app-modal-modification><i
+              style='font-size:24px' class='fas'>&#xf2ed;</i>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<h5 class="text-right">Ajouter une nature de mission <button class="btn btn-info" (click)="open(content)">+</button>
+<h5 class="text-right">Ajouter une nature de mission <button class="btn
+    btn-info" (click)="open(content)">+</button>
 </h5>
 
 <!--Modal-->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Ajout d'une nature de missions</h4>
+    <h4 class="modal-title" id="modal-basic-title">Ajout d'une nature de
+      missions</h4>
   </div>
   <div class="modal-body">
 
@@ -52,7 +55,8 @@
               <label for="nature">Nature</label>
             </div>
             <div class="col">
-              <input [(ngModel)]="nouvelNature.libelle" type="text" class="form-control" id="nature" name="libelle"
+              <input [(ngModel)]="nouvelNature.libelle" type="text"
+                class="form-control" id="nature" name="libelle"
                 required>
             </div>
           </div>
@@ -62,7 +66,8 @@
               <label for="facture">Facturée</label>
             </div>
             <div class="col">
-              <select [(ngModel)]="nouvelNature.payee" class="custom-select" id="facture" name="payee" required>
+              <select [(ngModel)]="nouvelNature.payee" class="custom-select"
+                id="facture" name="payee" required>
                 <option value="">NON</option>
                 <option value="true">OUI</option>
               </select>
@@ -74,9 +79,10 @@
               <label for="facture">Taux journalier</label>
             </div>
             <div class="col">
-              <input [(ngModel)]="nouvelNature.tjm" type="text" class="form-control" id="tjm" name="tjm" #tjm="ngModel"
+              <input [(ngModel)]="nouvelNature.tjm" type="text"
+                class="form-control" id="tjm" name="tjm" #tjm="ngModel"
                 required>
-              <p *ngIf="tjm.value < 0 ">
+              <p *ngIf="tjm.value <0">
                 Le taux journalier doit être supérieur à 0.
               </p>
             </div>
@@ -87,7 +93,8 @@
               <label for="prime">Versement prime</label>
             </div>
             <div class="col">
-              <select [(ngModel)]="nouvelNature.versementPrime" class="form-control" id="prime" name="versementPrime"
+              <select [(ngModel)]="nouvelNature.versementPrime"
+                class="form-control" id="prime" name="versementPrime"
                 required>
                 <option value="">NON</option>
                 <option value="true">OUI</option>
@@ -100,7 +107,8 @@
               <label for="pourcentagePrime">Pourcentage prime</label>
             </div>
             <div class="col">
-              <input [(ngModel)]="nouvelNature.pourcentagePrime" type="text" class="form-control" id="pourcentagePrime"
+              <input [(ngModel)]="nouvelNature.pourcentagePrime" type="text"
+                class="form-control" id="pourcentagePrime"
                 name="pourcentagePrime" #pourcentagePrime="ngModel" required>
               <p *ngIf="pourcentagePrime.value<0 || pourcentagePrime.value>10">
                 Le pourcentage doit être comprise entre 0 et 10.
@@ -113,9 +121,10 @@
               <label for="facture">Plafond de frais</label>
             </div>
             <div class="col">
-              <input [(ngModel)]="nouvelNature.plafondFrais" type="text" class="form-control" id="plafondFrais"
+              <input [(ngModel)]="nouvelNature.plafondFrais" type="text"
+                class="form-control" id="plafondFrais"
                 name="plafondFrais" required #plafond="ngModel">
-              <p *ngIf="plafond.value < 0 ">
+              <p *ngIf="plafond.value <0">
                 Le plafond de frais doit être supérieur à 0.
               </p>
             </div>
@@ -126,7 +135,8 @@
               <label for="facture">Dépassement de frais</label>
             </div>
             <div class="col">
-              <select [(ngModel)]="nouvelNature.depassementFrais" class="form-control" id="depassementFrais"
+              <select [(ngModel)]="nouvelNature.depassementFrais"
+                class="form-control" id="depassementFrais"
                 name="depassementFrais" required>
                 <option value="false">NON</option>
                 <option value="true">OUI</option>

@@ -19,13 +19,17 @@
       <td>{{mission.dateFin | date : 'dd-MM-yyyy'}}</td>
       <td>{{mission.nature.libelle}}</td>
       <td>{{mission.villeDepart}}</td>
-      <th>{{mission.villeArrivee}}</th>
+      <td>{{mission.villeArrivee}}</td>
       <td>{{mission.transport}}</td>
       <td>{{mission.noteDeFrais.fraisTotal}}€</td>
       <!-- TODO : changer les >= en <= : laisser comme ça pour tester-->
-      <td><i *ngIf="mission.dateFin <= dateAujourdHui" style='font-size:24px' class='fas'
-        [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i>
-        <i *ngIf="mission.dateFin < dateAujourdHui" style='font-size:24px' class='fas fa-file-pdf' (click)="genererPdf(mission)"></i></td>
+      <td>
+        <i *ngIf="mission.dateFin <= dateAujourdHui"
+          style='font-size:24px'class='fas'
+          [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i>
+        <i *ngIf="mission.dateFin <dateAujourdHui" style='font-size:24px'
+          class='fas fa-file-pdf' (click)="genererPdf(mission)"></i>
+      </td>
     </tr>
   </tbody>
 </table>
