@@ -3,7 +3,6 @@
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Modification d'une nature de mission</h4>
-    {{nature.uuid}}
   </div>
   <div class="modal-body">
 
@@ -28,10 +27,7 @@
               <option value="true">OUI</option>
             </select>
           </div>
-        </div>
-
-        <div class="form-row" *ngIf="nature.payee">
-          <div class="col">
+          <div class="col" *ngIf="nature.payee">
             <label for="facture">Taux journalier</label>
           </div>
           <div class="col">
@@ -53,10 +49,7 @@
               <option value="true">OUI</option>
             </select>
           </div>
-        </div>
-
-        <div class="form-row" *ngIf="nature.versementPrime">
-          <div class="col">
+          <div class="col" *ngIf="nature.versementPrime">
             <label for="pourcentagePrime">Pourcentage prime</label>
           </div>
           <div class="col">

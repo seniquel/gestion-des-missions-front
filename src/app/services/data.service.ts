@@ -25,6 +25,10 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  listerMissions(): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.URL_BACKEND}missions`);
+  }
+
   recupererMissions(): Observable<Mission[]> {
     return this.http.get<Mission[]>(`${this.URL_BACKEND}collegues/me/missions`);
   }
@@ -38,7 +42,7 @@ export class DataService {
     );
   }
 
-  ajouterLigne(ligne: LigneDeFraisDto, noteDeFraisId: string): Observable<any>{
+  ajouterLigne(ligne: LigneDeFraisDto, noteDeFraisId: string): Observable<any> {
     return this.http.post(`${this.URL_BACKEND}noteDeFrais/${noteDeFraisId}/ligneDeFrais`, JSON.stringify(ligne), httpOptions);
   }
 
