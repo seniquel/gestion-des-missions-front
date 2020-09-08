@@ -11,13 +11,11 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NatureMissionsComponent implements OnInit {
 
   listeNatures: Nature[];
-  nouvelNature: Nature = new Nature();
 
   constructor(private service: NatureService, config: NgbModalConfig, private modalService: NgbModal) {
-    this.nouvelNature.tjm = 0;
-    this.nouvelNature.pourcentagePrime = 0;
     config.backdrop = 'static';
     config.keyboard = false;
+
   }
 
   ngOnInit(): void {
@@ -29,29 +27,18 @@ export class NatureMissionsComponent implements OnInit {
       () => { }
     );
   }
-
-  // modal
-  open(content): void {
-    this.modalService.open(content);
-  }
-
   close(): void {
     this.modalService.dismissAll();
-    this.nouvelNature = new Nature();
-    this.nouvelNature.tjm = 0;
-    this.nouvelNature.pourcentagePrime = 0;
   }
 
   valider(): void {
-    if (!this.nouvelNature.payee) {
-      this.nouvelNature.payee = false;
-    }
-    if (!this.nouvelNature.versementPrime) {
-      this.nouvelNature.versementPrime = false;
-    }
-    setTimeout(() => {
-      this.service.creerNature(this.nouvelNature);
-    }, 1000);
+
   }
+
+  select(nature: Nature): void {
+    this.service.selectionner(nature);
+  }
+
+
 
 }

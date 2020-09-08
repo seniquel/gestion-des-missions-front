@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Nature } from '../nature-missions/nature.domain';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,16 @@ import { Observable } from 'rxjs';
 export class NatureService {
 
   URL_BACKEND = environment.baseUrl;
+  subjectNatureSelectionne = new Subject<Nature>();
 
   constructor(private http: HttpClient) { }
 
   recupererNatures(): Observable<Nature[]> {
     return this.http.get<Nature[]>(`${this.URL_BACKEND}natures`);
+  }
+
+  recupererNatureUuid(uuid: string): Observable<Nature> {
+    return this.http.get<Nature>(`${this.URL_BACKEND}natures/${uuid}`);
   }
 
   creerNature(nature: Nature): void {
@@ -40,6 +45,14 @@ export class NatureService {
       }
 
     });
-
   }
+
+  selectionner(natureselect: Nature): void {
+    this.subjectNatureSelectionne.next(natureselect);
+  }
+
+  sabonnerANatureSelect(): Observable<Nature> {
+    return this.subjectNatureSelectionne.asObservable();
+  }
+
 }

@@ -11,6 +11,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalModificationComponent implements OnInit {
 
   nature: Nature = new Nature();
+  uuid: string;
 
   constructor(private service: NatureService, config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
@@ -18,6 +19,9 @@ export class ModalModificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.sabonnerANatureSelect().subscribe(
+      nat => this.nature = nat
+    )
   }
 
   close(): void {
