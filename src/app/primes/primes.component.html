@@ -11,8 +11,7 @@
         <option>Choisissez une année</option>
         <option *ngFor="let annee of listeAnnee">{{annee}}</option>
       </select>
-      <img (click)="nouveauFichier()" src="./assets/xls.jpg"
-        ngbTooltip="Télécharger le fichier .xls" placement="right">
+      <img class="pointer" (click)="nouveauFichier()" src="./assets/xls.jpg" ngbTooltip="Télécharger le fichier .xsl" placement="right">
     </div>
     <!--Tableau récapitulatif-->
     <table class="table table-striped" *ngIf="collegueConnecte | async as col">

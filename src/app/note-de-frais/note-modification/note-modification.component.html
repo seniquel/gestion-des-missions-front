@@ -10,8 +10,8 @@
   </div>
   <div class="col-3">
     <p class="text-sm-left">
-      {{mission.dateDebut | date:'dd-MM-yyyy'}} <br />
-      {{mission.dateFin | date:'dd-MM-yyyy'}} <br />
+      {{mission.dateDebut | date:'dd/MM/yyyy'}} <br />
+      {{mission.dateFin | date:'dd/MM/yyyy'}} <br />
       {{mission.nature.libelle}}
     </p>
   </div>
@@ -41,12 +41,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let ligne of mission.noteDeFrais.lignesDeFrais">
-      <td>{{ligne.date | date:'dd-MM-yyyy'}}</td>
+      <td>{{ligne.date | date:'dd/MM/yyyy'}}</td>
       <td>{{ligne.nature}}</td>
       <td>{{ligne.montant}} €</td>
       <td>
-        <i style='font-size:24px' class='fas' (click)="modifierLigne(mission,ligne)">&#xf304;</i>
-        <i style='font-size:24px' class='fas fa-trash' (click)="supprimerLigne(ligne)"></i>
+        <i style='font-size:24px' class='fas pointer mx-1' (click)="modifierLigne(mission,ligne)">&#xf304;</i>
+        <i style='font-size:24px' class='fas fa-trash pointer mx-1' (click)="supprimerLigne(ligne)"></i>
       </td>
     </tr>
   </tbody>

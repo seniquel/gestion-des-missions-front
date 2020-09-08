@@ -18,6 +18,7 @@ export class MissionModifComponent implements OnInit {
   collegueConnecteData: Collegue;
   listeMissions: Mission[] = [new Mission()];
   listeNatures: Nature[] = [];
+  listeFeries: Date[] = [];
 
   natureSelectionee: Nature = new Nature();
 
@@ -60,6 +61,12 @@ export class MissionModifComponent implements OnInit {
       },
       err => console.log(err)
     );
+    // Récupération jours feriés
+    this.service.recupererJoursFeries().subscribe(
+      feries => this.listeFeries = Object.keys(feries).map(s => new Date(s)),
+      err => console.log(err)
+    );
+
   }
 
   selectionnerNature() {
@@ -131,10 +138,24 @@ export class MissionModifComponent implements OnInit {
     return debut >= debutMin;
   }
 
-  dateJourOuvrable(date: Date): boolean {
+  dateWeekend(date: Date): boolean {
     const d = new Date(date);
-    const weekend = d.getDay() === 0 || d.getDay() === 6;
-    return !weekend;
+    return d.getDay() === 0 || d.getDay() === 6;
+  }
+
+  dateFerie(date: Date): boolean {
+    const tDate = new Date(date).getTime();
+    for (const ferie of this.listeFeries) {
+      const tFerie = new Date(ferie).getTime();
+      if (tFerie === tDate) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  dateJourOuvrable(date: Date): boolean {
+    return !this.dateWeekend(date) && !this.dateFerie(date);
   }
 
   transportAvion(): boolean {

@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LigneSuppressionComponent } from './note-de-frais/ligne-de-frais/ligne-suppression/ligne-suppression.component';
 import { ChartsModule } from 'ng2-charts';
 import { ModalModificationComponent } from './nature-missions/modal-modification/modal-modification.component';
+import { ModalAjoutComponent } from './nature-missions/modal-ajout/modal-ajout.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -53,6 +54,7 @@ registerLocaleData(localeFr);
     NoteModificationComponent,
     LigneDeFraisComponent,
     LigneSuppressionComponent,
+    ModalAjoutComponent,
   ],
   imports: [
     BrowserModule,
