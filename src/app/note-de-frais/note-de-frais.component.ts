@@ -174,4 +174,19 @@ export class NoteDeFraisComponent implements OnInit {
       }
     };
   }
+  transportToString(transport: string): string {
+    switch (transport) {
+      case 'AVION':
+        return 'Avion';
+      case 'TRAIN':
+        return 'Train';
+      case 'COVOITURAGE':
+        return 'Covoiturage';
+      case 'VOITURE_DE_SERVICE':
+        return 'Voiture de service';
+      default:
+        return transport;
+
+    }
+  }
 }

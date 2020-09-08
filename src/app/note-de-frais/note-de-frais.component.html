@@ -15,13 +15,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let mission of listeMissions">
-      <td>{{mission.dateDebut | date : 'dd-MM-yyyy'}}</td>
-      <td>{{mission.dateFin | date : 'dd-MM-yyyy'}}</td>
+      <td>{{mission.dateDebut | date : 'dd/MM/yyyy'}}</td>
+      <td>{{mission.dateFin | date : 'dd/MM/yyyy'}}</td>
       <td>{{mission.nature.libelle}}</td>
       <td>{{mission.villeDepart}}</td>
-      <th>{{mission.villeArrivee}}</th>
-      <td>{{mission.transport}}</td>
-      <td>{{mission.noteDeFrais.fraisTotal}}€</td>
+      <td>{{mission.villeArrivee}}</td>
+      <td>{{transportToString(mission.transport)}}</td>
+      <td>{{mission.noteDeFrais.fraisTotal}} €</td>
       <!-- TODO : changer les >= en <= : laisser comme ça pour tester-->
       <td><i *ngIf="mission.dateFin <= dateAujourdHui" style='font-size:24px' class='fas'
         [routerLink]="['/note-modification',mission.uuid]">&#xf304;</i>
