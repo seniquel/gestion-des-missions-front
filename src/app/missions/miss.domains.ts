@@ -19,3 +19,15 @@ export class Mission {
   noteDeFrais: NoteDeFrais;
   libelle: string;
 }
+
+export class MissionDto {
+  dateDebut: Date;
+  dateFin: Date;
+  villeDepart: string;
+  villeArrivee: string;
+  prime: number;
+  collegueId: string;
+  natureId: string;
+  transport: string;
+  statut: string;
+}
