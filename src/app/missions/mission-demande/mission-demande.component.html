@@ -1,60 +1,121 @@
 <h1 class="text-center">Demande de mission</h1>
-<form>
+<form #etatForm="ngForm">
   <div class="col-12 col-md-8 form-group">
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Date de début : </p>
       </div>
       <div class="col">
-        <input type="date" class="form-control" required>
+        <input type="date" class="form-control" name="dateDebut" [(ngModel)]="mission.dateDebut"
+          #etatDateDebut="ngModel" min="{{dateDebutMin() | date:'yyyy-MM-dd'}}" required>
+        <div *ngIf="etatDateDebut.dirty && etatDateDebut.invalid" class="float-right text-danger">La date est invalide.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date
+          de début doit être avant la date de fin.
+        </div>
+        <div
+          *ngIf="etatDateDebut.dirty && etatDateFin.dirty && dateDebutMin()<mission.dateDebut && mission.transport === 'AVION'"
+          class="float-right text-danger">Prévoyez une anticipation de 7 jours pour effectuer un voyage en avion.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
+          La date ne doit pas se chevaucher avec une autre mission.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateDebutValide()" class="float-right text-danger">
+          La date doit être ultérieure à la date minimale.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateJourOuvrable(mission.dateDebut)"
+          class="float-right text-danger">
+          La mission doit commencer un jour ouvrable.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Date de fin : </p>
       </div>
       <div class="col">
-        <input type="date" class="form-control" required>
+        <input type="date" class="form-control" name="dateFin" [(ngModel)]="mission.dateFin" #etatDateFin="ngModel"
+          min="{{this.mission.dateDebut | date:'yyyy-MM-dd'}}" required>
+        <div *ngIf="etatDateFin.dirty && etatDateFin.invalid" class="float-right text-danger">La date est invalide.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateValide()" class="float-right text-danger">La date
+          de début doit être avant la date de fin.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !pasDeChevauchement()" class="float-right text-danger">
+          La date ne doit pas se chevaucher avec une autre mission.
+        </div>
+        <div *ngIf="etatDateDebut.dirty && etatDateFin.dirty && !dateJourOuvrable(mission.dateFin)"
+          class="float-right text-danger">
+          La mission doit se terminer un jour ouvrable.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Nature : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <select class="custom-select" name="nature" [(ngModel)]="natureSelectionee.uuid" #etatNature="ngModel"
+          (change)="selectionnerNature()" required>
+          <option value="">Choisissez une nature de mission</option>
+          <option *ngFor="let nat of listeNatures" [ngValue]="nat.uuid">{{nat.libelle}}</option>
+        </select>
+        <div *ngIf="etatNature.dirty && etatNature.invalid" class="float-right text-danger">Veuillez sélectionner une
+          nature.
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Ville de départ : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" name="villeDepart" [(ngModel)]="mission.villeDepart"
+          #etatVilleDepart="ngModel" placeholder="Entrez la ville de départ" required minlength=2>
+        <div *ngIf="etatVilleDepart.dirty && etatVilleDepart.invalid" class="float-right text-danger">La ville de départ
+          est invalide.</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Ville d'arrivée : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" name="villeArrivee" [(ngModel)]="mission.villeArrivee"
+          #etatVilleArrivee="ngModel" placeholder="Entrez la ville d'arrivée" required minlength=2>
+        <div *ngIf="etatVilleArrivee.dirty && etatVilleArrivee.invalid" class="float-right text-danger">La ville
+          d'arrivée
+          est invalide.</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2">
       <div class="col">
         <p>Transport : </p>
       </div>
       <div class="col">
-        <input type="text" class="form-control" required>
+        <div class="form-input mb-3">
+          <select class="custom-select" name="transport" [(ngModel)]="mission.transport" #etatTransport="ngModel"
+            required>
+            <option selected value="">Choisissez le mode de transport</option>
+            <option value="AVION">Avion</option>
+            <option value="TRAIN">Train</option>
+            <option value="COVOITURAGE">Covoiturage</option>
+            <option value="VOITURE_DE_SERVICE">Voiture de service</option>
+          </select>
+          <div *ngIf="etatTransport.dirty && etatTransport.invalid" class="float-right text-danger">Veuillez
+            sélectionner un mode de transport</div>
+          <div *ngIf="mission.transport === 'AVION'" class="float-right text-warning small">Un voyage en avion nécessite
+            7
+            jours d'anticipation.</div>
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row py-2" *ngIf="natureSelectionee.versementPrime && dateValide()">
       <div class="col">
         <p>Estimation prime : </p>
       </div>
       <div class="col">
-        <p>0 €</p>
+        <p>{{estimationPrime()}} €</p>
       </div>
     </div>
 
@@ -65,7 +126,10 @@
       <button class="btn btn-danger" routerLink="/gestion-missions">Annuler</button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-success">Valider</button>
+      <button type="ngbButton" class="btn btn-success" *ngIf="etatForm.valid && formValide()" (click)="validerMission()"
+        routerLink="/gestion-missions">Valider</button>
+      <button type="ngbButton" class="btn btn-secondary" *ngIf="!etatForm.valid || !formValide()"
+        disabled>Valider</button>
     </div>
   </div>
 

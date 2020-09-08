@@ -25,17 +25,17 @@ export class NoteModificationComponent implements OnInit {
   noteDeFrais: NoteDeFrais = new NoteDeFrais();
 
   constructor(private authSrv: AuthService,
-              private service: DataService,
-              private activatedRoute: ActivatedRoute,
-              private dialog: MatDialog,
-              private ligneService: LigneDeFraisService) { }
+    private service: DataService,
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private ligneService: LigneDeFraisService) { }
 
   ngOnInit(): void {
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
 
     this.activatedRoute.paramMap.subscribe(
       (params: ParamMap) => {
-        this.service.selectionnerMission(params.get('uuid')).subscribe(
+        this.service.selectionnerMissionParUuid(params.get('uuid')).subscribe(
           miss => this.mission = miss,
           err => { },
           () => { }
@@ -67,6 +67,7 @@ export class NoteModificationComponent implements OnInit {
         mission.prime,
         mission.noteDeFrais.fraisTotal),
     };
+    this.dialog.afterAllClosed.subscribe(() => this.ngOnInit());
     this.dialog.open(LigneDeFraisComponent, dialogConfig);
   }
 
@@ -83,6 +84,7 @@ export class NoteModificationComponent implements OnInit {
         (mission.noteDeFrais.fraisTotal - ligne.montant)),
       ligneRef: ligne
     };
+    this.dialog.afterAllClosed.subscribe(() => this.ngOnInit());
     this.dialog.open(LigneDeFraisComponent, dialogConfig);
   }
 
@@ -94,12 +96,7 @@ export class NoteModificationComponent implements OnInit {
     dialogConfig.data = {
       ligneRef: ligne
     };
-    /*if (confirm(`Voulez vous vraiment supprimer cette note :
-              ${ligne.date}
-              ${ligne.nature}
-              ${ligne.montant} ?`)) {
-      this.service.supprimerLigne(ligne.uuid).subscribe();
-      */
+    this.dialog.afterAllClosed.subscribe(() => this.ngOnInit());
     this.dialog.open(LigneSuppressionComponent, dialogConfig);
-    }
+  }
 }

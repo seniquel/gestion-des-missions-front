@@ -15,19 +15,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let mission of listeMissions">
-        <td>{{mission.dateDebut | date : 'dd/MM/yyyy'}}</td>
-        <td>{{mission.dateFin | date : 'dd/MM/yyyy'}}</td>
+        <td>{{mission.dateDebut}}</td>
+        <td>{{mission.dateFin}}</td>
         <td>{{mission.nature.libelle}}</td>
         <td>{{mission.villeDepart}}</td>
         <td>{{mission.villeArrivee}}</td>
-        <td>{{mission.transport}}</td>
+        <td>{{transportToString(mission.transport)}}</td>
         <td>{{mission.statut}}</td>
-        <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px' class='fas'
-            routerLink='/mission-modification' id="edit">&#xf304;</i><i style='font-size:24px' class='fas'>&#xf2ed;</i>
+        <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px'
+            class='fas pointer' (click)="selectionner(mission.uuid)" routerLink="/mission-modification">&#xf304;</i>
+          <i (click)="supprimer(mission)" style='font-size:24px' class='fas pointer'>&#xf2ed;</i>
           <i *ngIf="mission.nature.libelle == 'Congés payés'" style='font-size:24px' class='fas'>&#xf06e;</i></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="text-right">Demander une mission <button class="btn btn-info" routerLink="/mission-demande">+</button></h5>
 </div>
-
-<h5 class="text-right">Demander une mission <button class="btn btn-info" routerLink="/mission-demande">+</button></h5>
