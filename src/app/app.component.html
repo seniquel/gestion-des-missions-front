@@ -5,7 +5,7 @@
   <div class="text-right">
     <ng-container *ngIf="collegueConnecte | async as col">
       <div class="lead" *ngIf="!col.estAnonyme()">
-        <p>Bienvenue {{col.nom}} ! <i class="fa fa-power-off" (click)="seDeconnecter()" id="deco"
+        <p>Bienvenue {{col.nom}} ! <i class="fa fa-power-off pointer" (click)="seDeconnecter()" id="deco"
             ngbTooltip="Déconnection"></i></p>
       </div>
     </ng-container>

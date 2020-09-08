@@ -24,9 +24,9 @@
           <td>{{transportToString(mission.transport)}}</td>
           <td>{{mission.statut}}</td>
           <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px'
-              class='fas pointer' (click)="selectionner(mission.uuid)" routerLink="/mission-modification">&#xf304;</i>
+              class='fas pointer mx-1' (click)="selectionner(mission.uuid)" routerLink="/mission-modification">&#xf304;</i>
             <i *ngIf="!missionEnCours(mission)" (click)="supprimer(mission)" style='font-size:24px'
-              class='fas pointer'>&#xf2ed;</i>
+              class='fas pointer mx-1'>&#xf2ed;</i>
             <i *ngIf="mission.nature.libelle == 'Congés payés'" style='font-size:24px' class='fas'>&#xf06e;</i></td>
         </tr>
       </ng-container>
