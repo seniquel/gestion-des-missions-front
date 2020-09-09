@@ -24,7 +24,12 @@ export class ModalSuppressionComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  valider(): void {
+  supprimer(nature): void {
+    this.service.deleteNature(nature.uuid).subscribe(
+      () => { },
+      err => console.log(err)
+    );
+    window.location.reload();
   }
 
   open(content): void {
