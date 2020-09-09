@@ -43,7 +43,7 @@ export class ModalModificationComponent implements OnInit {
 
     let utilise: boolean = false;
     for (let i = 0; i < this.listeMissions.length; i++) {
-      if (this.listeMissions[i].nature.libelle.includes(this.nature.libelle)) {
+      if (this.listeMissions[i].nature.uuid.includes(this.nature.uuid)) {
         utilise = true;
       }
     }
