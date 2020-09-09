@@ -27,8 +27,8 @@
           <td>{{nature.plafondFrais}}</td>
           <td>{{nature.depassementFrais ? 'OUI' : 'NON'}}</td>
           <td>
-            <app-modal-modification class="pointer" (click)="select(nature)"></app-modal-modification><i style='font-size:24px'
-              class='fas pointer'>&#xf2ed;</i>
+            <app-modal-modification class="pointer" (click)="select(nature)"></app-modal-modification>
+            <app-modal-suppression (click)="select(nature)"></app-modal-suppression>
           </td>
         </tr>
       </tbody>

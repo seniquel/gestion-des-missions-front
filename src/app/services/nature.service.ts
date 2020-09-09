@@ -99,6 +99,10 @@ export class NatureService {
     });
   }
 
+  deleteNature(uuid: string): Observable<string> {
+    return this.http.delete<string>(`${this.URL_BACKEND}natures/${uuid}`);
+  }
+
   selectionner(natureselect: Nature): void {
     this.subjectNatureSelectionne.next(natureselect);
   }

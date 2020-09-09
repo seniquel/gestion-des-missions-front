@@ -1,0 +1,31 @@
+<i style='font-size:24px' class='fas pointer' (click)="open(content)">&#xf2ed;</i>
+
+<!--Modal-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation de suppression</h4>
+  </div>
+  <div class="modal-body">
+
+    <div>
+      <form (ngSubmit)="supprimer(nature)" #monForm="ngForm">
+        <div class="form-row">
+          <div class="col">
+            <p>Confirmez-vous la suppression de la nature de mission {{nature.libelle}}?</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <button class="btn btn-danger" (click)="close()" type="reset">Annuler</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-success" type="submit">Valider</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
