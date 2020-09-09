@@ -111,7 +111,7 @@ export class NoteDeFraisComponent implements OnInit {
         }
       }
     };
-    if (confirm(`Voules vous téléchérger ce fichier : \nmission_${mission.uuid}.pdf ?`)) {
+    if (confirm(`Voulez-vous télécharger ce fichier : \nmission_${mission.uuid}.pdf ?`)) {
       pdfMake.createPdf(DocumentDefinition).download(`mission_${mission.uuid}`);
     }
   }
