@@ -31,6 +31,7 @@ import { LigneSuppressionComponent } from './note-de-frais/ligne-de-frais/ligne-
 import { ChartsModule } from 'ng2-charts';
 import { ModalModificationComponent } from './nature-missions/modal-modification/modal-modification.component';
 import { ModalAjoutComponent } from './nature-missions/modal-ajout/modal-ajout.component';
+import { ModalSuppressionComponent } from './nature-missions/modal-suppression/modal-suppression.component';
 
 // Calendar
 registerLocaleData(localeFr);
@@ -55,6 +56,7 @@ registerLocaleData(localeFr);
     LigneDeFraisComponent,
     LigneSuppressionComponent,
     ModalAjoutComponent,
+    ModalSuppressionComponent,
   ],
   imports: [
     BrowserModule,

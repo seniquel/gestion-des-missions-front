@@ -35,6 +35,19 @@ export class NatureMissionsComponent implements OnInit {
     this.service.selectionner(nature);
   }
 
+  delete(uuid: string): void {
+    this.service.deleteNature(uuid).subscribe(() => { },
+      err => console.log(err));
+  }
+
+  supprimer(nature): void {
+    this.service.deleteNature(nature.uuid).subscribe(
+      () => { },
+      err => console.log(err)
+    );
+    console.log(this.listeNatures.indexOf(nature));
+  }
+
 
 
 }
