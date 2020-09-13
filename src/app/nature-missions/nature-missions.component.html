@@ -1,0 +1,38 @@
+<h1 class="text-center">Nature de mission</h1>
+
+<div class="row">
+  <div class="table-responsive">
+    <!--Tableau récapitulatif-->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nature</th>
+          <th scope="col">Facturée</th>
+          <th scope="col">Prime</th>
+          <th scope="col">TJM (€)</th>
+          <th scope="col">% Prime</th>
+          <th scope="col">Plafond frais</th>
+          <th scope="col">Dépt. frais</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nature of listeNatures">
+          <td>{{nature.libelle}}
+          </td>
+          <td>{{nature.payee ? 'OUI' : 'NON'}}</td>
+          <td>{{nature.versementPrime ? 'OUI' : 'NON'}}</td>
+          <td>{{nature.tjm}}</td>
+          <td>{{nature.pourcentagePrime}}</td>
+          <td>{{nature.plafondFrais}}</td>
+          <td>{{nature.depassementFrais ? 'OUI' : 'NON'}}</td>
+          <td>
+            <app-modal-modification class="pointer" (click)="select(nature)"></app-modal-modification>
+            <app-modal-suppression (click)="select(nature)"></app-modal-suppression>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-modal-ajout></app-modal-ajout>

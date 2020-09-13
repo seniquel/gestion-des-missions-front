@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {Collegue} from './auth/auth.domains';
-import {AuthService} from './auth/auth.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Collegue } from './auth/auth.domains';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent {
    */
   seDeconnecter() {
     this.authSrv.seDeconnecter().subscribe(
-      () => this.router.navigate(['/auth'])
+      () => this.router.navigate(['/connexion'])
     );
   }
 
@@ -32,7 +32,6 @@ export class AppComponent {
    * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
    */
   ngOnInit(): void {
-
     this.collegueConnecte = this.authSrv.collegueConnecteObs;
   }
 }

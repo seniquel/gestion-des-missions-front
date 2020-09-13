@@ -1,0 +1,31 @@
+<h1 class="text-center">Validation des missions</h1>
+<div class="row">
+  <div class="table-responsive">
+    <!--Tableau récapitulatif-->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date de début</th>
+          <th>Date de fin</th>
+          <th>Nature</th>
+          <th>Départ</th>
+          <th>Arrivée</th>
+          <th>Transport</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mission of listeMissions">
+          <td>{{mission.dateDebut | date: 'dd/MM/yyyy'}}</td>
+          <td>{{mission.dateFin | date: 'dd/MM/yyyy'}}</td>
+          <td>{{mission.nature.libelle}}</td>
+          <td>{{mission.villeDepart}}</td>
+          <td>{{mission.villeArrivee}}</td>
+          <td>{{mission.transport}}</td>
+          <td><i class='fas fa-thumbs-up' id="up" ngbTooltip="Valider" (click)="validation(mission)"></i><i
+              class='fas fa-thumbs-down' id="down" ngbTooltip="Rejeter" (click)="rejet(mission)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

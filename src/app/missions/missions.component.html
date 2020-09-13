@@ -1,0 +1,36 @@
+<h1 class="text-center">Gestion des Missions</h1>
+<div class="table-responsive">
+  <table class="table table-striped" *ngIf="collegueConnecte | async as col">
+    <thead>
+      <tr>
+        <th scope="col">Date de début</th>
+        <th scope="col">Date de fin</th>
+        <th scope="col">Nature</th>
+        <th scope="col">Départ</th>
+        <th scope="col">Arrivée</th>
+        <th scope="col">Transport</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let mission of listeMissions">
+        <tr *ngIf="!missionTerminee(mission)">
+          <td>{{mission.dateDebut | date : 'dd/MM/yyyy'}}</td>
+          <td>{{mission.dateFin | date : 'dd/MM/yyyy'}}</td>
+          <td>{{mission.nature.libelle}}</td>
+          <td>{{mission.villeDepart}}</td>
+          <td>{{mission.villeArrivee}}</td>
+          <td>{{transportToString(mission.transport)}}</td>
+          <td>{{mission.statut}}</td>
+          <td><i *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'" style='font-size:24px'
+              class='fas pointer mx-1' (click)="selectionner(mission.uuid)" routerLink="/mission-modification">&#xf304;</i>
+            <i *ngIf="!missionEnCours(mission)" (click)="supprimer(mission)" style='font-size:24px'
+              class='fas pointer mx-1'>&#xf2ed;</i>
+            <i *ngIf="mission.nature.libelle == 'Congés payés'" style='font-size:24px' class='fas'>&#xf06e;</i></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <h5 class="text-right">Demander une mission <button class="btn btn-info" routerLink="/mission-demande">+</button></h5>
+</div>

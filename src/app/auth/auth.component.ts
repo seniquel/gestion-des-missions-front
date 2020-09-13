@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Collegue} from './auth.domains';
-import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+import { Collegue } from './auth.domains';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 /**
  * Formulaire d'authentification.
@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
   styles: []
 })
 export class AuthComponent implements OnInit {
-
 
   collegue: Collegue = new Collegue({});
   err: boolean;
@@ -26,7 +25,7 @@ export class AuthComponent implements OnInit {
     this.authSrv.connecter(this.collegue.email, this.collegue.motDePasse)
       .subscribe(
         // en cas de succès, redirection vers la page /tech
-        col => this.router.navigate(['/tech']),
+        col => this.router.navigate(['/accueil']),
 
         // en cas d'erreur, affichage d'un message d'erreur
         err => this.err = true

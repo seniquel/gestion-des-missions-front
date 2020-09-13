@@ -1,0 +1,20 @@
+{
+  "/jours-feries": {
+    "target": "https://calendrier.api.gouv.fr/jours-feries/metropole.json",
+    "secure": false,
+    "logLevel": "warn",
+    "pathRewrite": {
+      "^/jours-feries": ""
+    },
+    "changeOrigin": true
+  },
+  "/traitement": {
+    "target": "http://localhost:8080/missions/traitement",
+    "secure": false,
+    "logLevel": "warn",
+    "pathRewrite": {
+      "^/traitement": ""
+    },
+    "changeOrigin": true
+  }
+}
